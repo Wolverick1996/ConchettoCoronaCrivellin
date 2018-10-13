@@ -1,4 +1,4 @@
-# TrackMe (SE2 mandatory project - A.A. 2018/2019)
+# TrackMe (SE2 mandatory project - A.Y. 2018/2019)
 ## Group members
 - Claudia Conchetto - 849111
 - Riccardo Corona - 845610
