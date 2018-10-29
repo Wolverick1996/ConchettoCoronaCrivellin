@@ -1,7 +1,7 @@
-%\documentclass[11pt]{article}
-%\usepackage{fullpage}
+\documentclass[11pt]{article}
+\usepackage{fullpage}
 
-%\begin{document}
+\begin{document}
 
 \subsection{External interface requirements}
 \subsubsection{User interfaces}
@@ -12,22 +12,94 @@
 \subsection{Scenario}
 
 \subsection{Functional Requirements}
-\textbf{[G1] - Users and third parties can be recognized by providing a form with their data}
+\textbf{[G1] - Users and third parties can be recognized by providing a form with their data} \newline
 
-\textbf{[G2] - Allow third parties to access to the data of some specific individuals}
+[R1] -  The usernames used in the system are unique to every user and third party. \newline
 
-\textbf{[G3] - Allow third parties to access to anonymized data of groups of individuals}
+[D1] - Third parties own an alphanumerical code received from a TrackMe administrator used to verify their identities and match them with the company account. \newline
 
-\textbf{[G4] - Allow third parties to subscribe to new data and to receive them as soon as they are produced}
+[R2] - Users and third parties can create an account by compiling a form. \newline
 
-\textbf{[G5] - Allow the users, through the AutomatedSOS service, to come help by an ambulance when such parameters fall below certain thresholds}
+\hspace{\parindent}[R2.1] - The form should contain the following: username, password, choice between user and third party account, other anagraphical info (for the user) or company info (for the third party). \newline
 
-\textbf{[G6] - Allow racing organizers, through the Track4Run service, to define a path for runs}
+[R3] - Third parties must provide an identification alphanumerical code to confirm their identity. \newline
 
-\textbf{[G7] - Allow racing partecipants to enroll runs}
+[R4] - Users and third parties can log in to the application by providing the combination of a username and a password that match an account. \newline
 
-\textbf{[G8] - Allow racing spectators to see on a map the position of all runners during the run}
+\hspace{-\parindent}\textbf{[G2] - Allow third parties to access to the data of some specific individuals} \newline
 
-\textbf{[G9] - Allow users to monitor their own health status}
+[D2] - Device sensors can provide accurate data to the app. \newline
 
-%\end{document}
+[R5] - Third parties can search for specified data by filling the search bar with the fiscal code of a specific user. \newline
+
+[R6] - A notify is sent to the selected user, who can accept or refuse the sharing of data with the specific company. \newline
+
+[R7] - A message is sent to the third party, containing user's data if he/she allowed the sharing or a notification of refuse otherwise. \newline
+
+[R8] - Users under 18 years old can't be shown in the results of a search. \newline
+
+\hspace{-\parindent}\textbf{[G3] - Allow third parties to access to anonymized data of groups of individuals} \newline
+
+[R9] - Third parties can search for anonymized data of a specific group of users by selecting search filters (location, age, sex, time slot). \newline
+
+[R10] - Anonymized data are shown just if the research produces at least 1000 results. \newline
+
+\hspace{-\parindent}\textbf{[G4] - Allow third parties to subscribe to new data and to receive them as soon as they are produced} \newline
+
+[R11] - Third parties can flag an option to subscribe to new data of a specific user when they receive his/her data (the user already allowed the data sharing), or they can subscribe to get results of a research with specific filters as soon as they are produced. \newline
+
+[R12] - Third parties can manage their subscriptions in a management section in the app. \newline
+
+\hspace{-\parindent}\textbf{[G5] - Allow the users, through the AutomatedSOS service, to come help by an ambulance when such parameters fall below certain thresholds} \newline
+
+[D3] - A good number of operators works in the TrackMe headquarter. It's always guaranteed the management of an SOS signal by calling an ambulance. \newline
+
+[R13] - Users can manage the subscription to the AutomatedSOS service through a specific option in the settings menu. \newline
+
+[R14] - Old users (60+ years old) are automatically subscribed to the AutomatedSOS service since their registration. \newline
+
+[R15] - The app takes at least 5 seconds to send the SOS signal to the headquarter. \newline
+
+\hspace{-\parindent}\textbf{[G6] - Allow racing organizers, through the Track4Run service, to manage runs and define a path for runs} \newline
+
+[R16] - Users can create races by defining name, date, time, start point, stages and arrival point, and selecting the method of partecipation (open or by invitation) and the date and time of expiration for registrations. \newline
+
+\hspace{\parindent}[R16.1] - If a race by invitation is selected, a private link to a registration page is generated. \newline
+
+[R17] - The system allows the organizers to sign an enrolled runner as "present" and to disqualify a runner by signing him/her as "disqualified". \newline
+
+[R18] - Users can manage their orga in a management section in the app. \newline
+
+\hspace{\parindent}[R18.1] - Organizers can postpone or delete a run. A notification is sent to partecipants and spectators. \newline
+
+\hspace{-\parindent}\textbf{[G7] - Allow racing partecipants to enroll runs} \newline
+
+[R19] - Users can visualize nearby races or search for a specific run by searching for the name or location of the race. \newline
+
+[D4] - The run can be joined only by persons enrolled through the app. \newline
+
+[D5] - If it is required a payment to enroll a run, an external service will guarantee secure transactions and receipts by e-mail. \newline
+
+[R20] - Runners can join a race through the race overview by clicking the "Participate" button. For races by invitation the button is visible just to invited users following the registration link. \newline
+
+\hspace{\parindent}[R20.1] - If it's specified that some payment is required, it will be committed to an external service. \newline
+
+[R21] - When the race starts, the partecipant have to wear his/her wearable device with Data4Help installed. \newline
+
+\hspace{-\parindent}\textbf{[G8] - Allow racing spectators to see on a map the position of all runners during the run} \newline
+
+[R22] - Users can become spectators of a race through the race overview by clicking the "Observe" button. \newline
+
+[R23] - For the duration of the race is always possible to see in the event page the map with markers, associated to runners' name through numbers, and a live leaderboard showing names, order numbers and possible disqualifications. \newline
+
+[R24] - A marker is on the track iff it corresponds to a user enrolled, signed as "present" at the run with his/her wearable device with Data4Help installed and not disqualified. \newline
+
+[R25] - The track represented is the one chosen by the organizer of the run. \newline
+
+[R26] - Markers move according to the corresponding persons' movement, as reported by the location service. \newline
+
+\hspace{-\parindent}\textbf{[G9] - Allow users to monitor their own health status} \newline
+
+[R27] - Users can visualize their own health status in the home page section of the app. \newline
+
+\end{document}
