@@ -1,13 +1,14 @@
 %\documentclass[11pt]{article}
 %\usepackage{fullpage}
 %\usepackage{graphicx}
+%\usepackage{indentfirst}
 %\usepackage[font=small, labelfont=bf, skip=1pt]{caption}
 
 %\begin{document}
 
 \subsection{External interface requirements}
 \subsubsection{User interfaces}
-The following mockups represent a basic idea of what the mobile app will look like in the first release. \newline
+The following mockups represent a basic idea of what the mobile app will look like in the first release. The last one shows instead an idea about the minimal interface of the wearable application. \newline
 
 \begin{figure}[h!]
 \centering
@@ -47,13 +48,18 @@ The following mockups represent a basic idea of what the mobile app will look li
 \end{figure}
 
 \subsubsection{Hardware interfaces}
+The application doesn't use any hardware interface, however it requires a smartphone paired with a wearable device like a smartwatch or a fitness tracker (pairing in most cases is via bluetooth).
+
+The wearable device must have at least the following sensors: GPS, accelerometer, altimeter, gyroscope, heart rate sensor. Blood pressure sensor is also supported by the app and devices equipped with it are highly recommended for a complete experience with TrackMe.
+
+Smartwatch with Wear OS can also download a TrackMe version specifically designed for this kind of devices.
+
 \subsubsection{Software interfaces}
 \subsubsection{Communication interface}
-
-\subsection{Scenario}
+\subsection{Scenarios}
 
 \subsection{Functional Requirements}
-\textbf{[G1] - Users and third parties can be recognized by providing a form with their data} \newline
+\hspace{-\parindent}\textbf{[G1] - Users and third parties can be recognized by providing a form with their data} \newline
 
 [R1] -  The usernames used in the system are unique to every user and third party. \newline
 
