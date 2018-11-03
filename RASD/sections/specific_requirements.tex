@@ -48,15 +48,30 @@ The following mockups represent a basic idea of what the mobile app will look li
 \end{figure}
 
 \subsubsection{Hardware interfaces}
-The application doesn't use any hardware interface, however it requires a smartphone paired with a wearable device like a smartwatch or a fitness tracker (pairing in most cases is via bluetooth).
+The application doesn't use any hardware interface, however a smartphone paired with a wearable device like a smartwatch or a fitness tracker is required to use the Data4Help and AutomatedSOS services, and to participate to races using Track4Run (pairing in most cases is made via bluetooth).
 
 The wearable device must have at least the following sensors: GPS, accelerometer, altimeter, gyroscope, heart rate sensor. Blood pressure sensor is also supported by the app and devices equipped with it are highly recommended for a complete experience with TrackMe.
 
-Smartwatch with Wear OS can also download a TrackMe version specifically designed for this kind of devices.
+Organizers and spectators of running races, and also third parties can manage their activities without specific hardware requirements (wearable device not required for their tasks).
+
+Users who own a smartwatch with Wear OS can also download a TrackMe version specifically designed for this kind of devices.
 
 \subsubsection{Software interfaces}
 \subsubsection{Communication interface}
+
 \subsection{Scenarios}
+\subsubsection{Scenario 1}
+Aurora is a non-profit organization that deals with disabled young people. Aurora's board of directors decided to use TrackMe to support medicians in their work and monitor the health status of patients in a more efficient way. Most of the patients, according with their parents, decided to download the app on their smartphone. Aurora's medicians were able to estimate the average course of the heartbeat and blood pressure of patients just searching for anonymous data using the age filter (18-21 years old) and the location filter (via Aurora 2, Perugia) and subscribing to the search results.
+
+\subsubsection{Scenario 2}
+Davide is the athletic trainer for the under 21 athletes of Milano Atletica. He decided to organize a competition between his student, so he launched TrackMe and created a new running race in the "Your running races" section, using the "+" button. He selected the location of the sport center (via Cimabue, Milan) and established the date of the race (15/11/2018) and the closing date of the registrations (14/11/2018). He obviously decided to select the partecipants sending them invites to join the competition.
+
+Giovanni, one of his students, immediately joined the competition but unluckily he was not able to compete due to an injury. Through the "MANAGE" option Davide was able to mark him as "disqualified" in order to effectively know the participants in the race and monitor their performances.
+
+\subsubsection{Scenario 3}
+Lidia is an elderly woman who loves walking. His grandson Matteo suggested her to download the TrackMe app on her smartphone paired with her fitness tracker, in order to monitor her own activities and health status and also to make sure his grandmother receives assistance in case of health problems.
+
+One day, during a walk, Lidia felt sick and collapsed on the ground. TrackMe detected an abnormality in the heartbeat and called immediately the 112, sending also an SMS with her position, heart rate and blood pressure. The ambulance intervened a few minutes later and Lidia was successfully rescued.
 
 \subsection{Functional Requirements}
 \hspace{-\parindent}\textbf{[G1] - Users and third parties can be recognized by providing a form with their data} \newline
@@ -99,13 +114,13 @@ Smartwatch with Wear OS can also download a TrackMe version specifically designe
 
 \hspace{-\parindent}\textbf{[G5] - Allow the users, through the AutomatedSOS service, to come help by an ambulance when such parameters fall below certain thresholds} \newline
 
-[D3] - A good number of operators works in the TrackMe headquarter. It's always guaranteed the management of an SOS signal by calling an ambulance. \newline
+[D3] - TrackMe is affiliated with NUE 112 (Numero Unico per le Emergenze) to offer assistance in Europe, and with 911 to offer assistance in the USA. \newline
 
 [R13] - Users can manage the subscription to the AutomatedSOS service through a specific option in the settings menu. \newline
 
 [R14] - Old users (60+ years old) are automatically subscribed to the AutomatedSOS service since their registration. \newline
 
-[R15] - The app takes at least 5 seconds to send the SOS signal to the headquarter. \newline
+[R15] - The app calls autonomously the NUE (or 911) when such parameters fall below certain thresholds, and sends concurrently user's data (GPS location and health status parameters) via SMS. \newline
 
 \hspace{-\parindent}\textbf{[G6] - Allow racing organizers, through the Track4Run service, to manage runs and define a path for runs} \newline
 
