@@ -1,7 +1,6 @@
 %\documentclass[11pt]{article}
 %\usepackage{fullpage}
 %\usepackage{graphicx}
-%\usepackage{indentfirst}
 %\usepackage[font=small, labelfont=bf, skip=1pt]{caption}
 
 %\begin{document}
@@ -57,7 +56,20 @@ Organizers and spectators of running races, and also third parties can manage th
 Users who own a smartwatch with Wear OS can also download a TrackMe version specifically designed for this kind of devices.
 
 \subsubsection{Software interfaces}
+The application obviously offers a graphical user interface, which allows users to easily communicate with the device.
+
+Furthermore the app uses a city maps external service, suitable for embedding in order to simplify the overall architecture and make it more lightweight. Because the Track4Run service is based on planning, participating and following running races, the app needs accurate real-time informations for mapping the track. Google Maps APIs represent the best choice in order to provide an effective service. Google Maps also provides the users with the reliable location information they need throughout the world.
+
 \subsubsection{Communication interface}
+The app uses the following communication interfaces:
+\begin{itemize}
+\item Internet connection for communication of data.
+\item RESTful APIs and JSON data format for communication over HTTP.
+\item SDK Maps for Android, SDK Maps for iOS and API Maps JavaScript in order to allow an efficient Google Maps integration (these APIs allow to add an interactive and personalizable map in a mobile application, on Android and iOS).
+\item Push APIs in order to allow the app to send and receive push notifications to users' devices (both iOS and Android are supported).
+\item SMS and voice APIs in order to allow the app to send SMS and to make phone calls (useful for the AutomatedSOS service). A VoIP infrastructure is also required for the voice service.
+\item Wearable APIs in order to get data from smartphones, fitness trackers and other wearable devices.
+\end{itemize}
 
 \subsection{Scenarios}
 \subsubsection{Scenario 1}
@@ -74,7 +86,7 @@ Lidia is an elderly woman who loves walking. His grandson Matteo suggested her t
 One day, during a walk, Lidia felt sick and collapsed on the ground. TrackMe detected an abnormality in the heartbeat and called immediately the 112, sending also an SMS with her position, heart rate and blood pressure. The ambulance intervened a few minutes later and Lidia was successfully rescued.
 
 \subsection{Functional Requirements}
-\hspace{-\parindent}\textbf{[G1] - Users and third parties can be recognized by providing a form with their data} \newline
+\textbf{[G1] - Users and third parties can be recognized by providing a form with their data} \newline
 
 [R1] -  The usernames used in the system are unique to every user and third party. \newline
 
