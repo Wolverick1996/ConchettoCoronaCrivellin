@@ -49,11 +49,11 @@ The following mockups represent a basic idea of what the mobile app will look li
 \subsubsection{Hardware interfaces}
 The application doesn't use any hardware interface, however a smartphone paired with a wearable device like a smartwatch or a fitness tracker is required to use the Data4Help and AutomatedSOS services, and to participate to races using Track4Run (pairing in most cases is made via bluetooth).
 
-The wearable device must have at least the following sensors: GPS, accelerometer, altimeter, gyroscope, heart rate sensor. Blood pressure sensor is also supported by the app and devices equipped with it are highly recommended for a complete experience with TrackMe.
+The wearable device must have at least the following sensors: GPS, accelerometer, altimeter, gyroscope, heart rate sensor. Other biosensors supported are related to the detection of glucose level, blood pressure, body temperature and ECG and devices equipped with them are highly recommended for a complete experience with TrackMe.
 
 Organizers and spectators of running races, and also third parties can manage their activities without specific hardware requirements (wearable device not required for their tasks).
 
-Users who own a smartwatch with Wear OS can also download a TrackMe version specifically designed for this kind of devices.
+Users who own a smartwatch with Wear OS or watchOS can also download a TrackMe version specifically designed for this kind of devices.
 
 \subsubsection{Software interfaces}
 The application obviously offers a graphical user interface, which allows users to easily communicate with the device.
@@ -66,14 +66,14 @@ The app uses the following communication interfaces:
 \item Internet connection for communication of data.
 \item RESTful APIs and JSON data format for communication over HTTP.
 \item SDK Maps for Android, SDK Maps for iOS and API Maps JavaScript in order to allow an efficient Google Maps integration (these APIs allow to add an interactive and personalizable map in a mobile application, on Android and iOS).
-\item Push APIs in order to allow the app to send and receive push notifications to users' devices (both iOS and Android are supported).
-\item SMS and voice APIs in order to allow the app to send SMS and to make phone calls (useful for the AutomatedSOS service). A VoIP infrastructure is also required for the voice service.
+\item Interface with the push service(s) via own APIs in order to allow the app to send and receive push notifications to users' devices (both iOS and Android are supported).
+\item Interface with SMS and voice gateway provider via standard APIs in order to allow the app to send SMS and to make phone calls (useful for the AutomatedSOS service).
 \item Wearable APIs in order to get data from smartphones, fitness trackers and other wearable devices.
 \end{itemize}
 
 \subsection{Scenarios}
 \subsubsection{Scenario 1}
-Aurora is a non-profit organization that deals with disabled young people. Aurora's board of directors decided to use TrackMe to support medicians in their work and monitor the health status of patients in a more efficient way. Most of the patients, according with their parents, decided to download the app on their smartphone. Aurora's medicians were able to estimate the average course of the heartbeat and blood pressure of patients just searching for anonymous data using the age filter (18-21 years old) and the location filter (via Aurora 2, Perugia) and subscribing to the search results.
+Aurora is a non-profit organization that deals with disabled young people. Aurora's board of directors decided to use TrackMe to support medicians in their work and monitor the health status of patients in a more efficient way. Most of the patients, according with their parents, decided to download the app on their smartphone. Aurora's medicians were able to estimate the average course of the heartbeat, blood pressure, body temperature, glucose level and ECG of patients just searching for anonymous data using the age filter (18-21 years old) and the location filter (via Aurora 2, Perugia) and subscribing to the search results.
 
 \subsubsection{Scenario 2}
 Davide is the athletic trainer for the under 21 athletes of Milano Atletica. He decided to organize a competition between his student, so he launched TrackMe and created a new running race in the "Your running races" section, using the "+" button. He selected the location of the sport center (via Cimabue, Milan) and established the date of the race (15/11/2018) and the closing date of the registrations (14/11/2018). He obviously decided to select the partecipants sending them invites to join the competition.
@@ -94,7 +94,7 @@ One day, during a walk, Lidia felt sick and collapsed on the ground. TrackMe det
 
 [R2] - Users and third parties can create an account by compiling a form. \newline
 
-\hspace{\parindent}[R2.1] - The form should contain the following: username, password, choice between user and third party account, other anagraphical info (for the user) or company info (for the third party). \newline
+\hspace{\parindent}[R2.1] - The form should contain the following: username, password, choice between personal and third party account, other anagraphical info (for the user) or company info (for the third party). \newline
 
 [R3] - Third parties must provide an identification alphanumerical code to confirm their identity. \newline
 
@@ -175,5 +175,45 @@ One day, during a walk, Lidia felt sick and collapsed on the ground. TrackMe det
 \hspace{-\parindent}\textbf{[G9] - Allow users to monitor their own health status} \newline
 
 [R27] - Users can visualize their own health status in the home page section of the app. \newline
+
+\subsection{Performance requirements}
+The system is provided to serve fairly great number of users simultaneously. Because of the nature of the application, especially for what concerns the AutomatedSOS service, we have to guarantee quick, reactive and correct responses. When health status parameters fall below certain thresholds the app guarantees a reaction time of less then 5 seconds to contact the NUE (or 911).
+
+\subsection{Design constraints}
+\subsubsection{Standards compliance}
+\begin{itemize}
+\item The app requests only the absolute minimum permissions that it needs to support core functionalities.
+\item The mobile app supports both landscape and portrait orientations (if possible). Orientations expose largely the same features and actions and preserve functional parity. Minor changes in content
+or views are acceptable. The smartwatch app fits to the dimension of the device.
+\end{itemize}
+
+\subsubsection{Hardware limitations}
+As previously mentioned in the "Hardware interfaces" section, the app requires a device with a GPS sensor and a wearable device with at least the following sensors: GPS, accelerometer, altimeter, gyroscope, heart rate sensor (biosensor related to the detection of glucose level, blood pressure, body temperature and ECG also supported and recommended). Both iOS and Android are supported, and the connection required can be based on the following technologies: 2G, 3G, 4G, LTE.
+
+\subsubsection{Other constraints}
+Regulatory policies are respected: the app share user's data just with third parties allowed by the user himself, and he can also manage his concessions. Data are not used for commercial purpose.
+
+User's payment informations could be asked in particular situations (organization of some special running races) but the app will use them only for fees and rides payments and will not share them with anyone (neither third parties allowed to receive user's data).
+
+\subsection{Software system attributes}
+\subsubsection{Reliability}
+The application must be available 24/7. Because of the nature of the app, especially for what concerns the AutomatedSOS service, deviations are not tolerated and system's maintenances must be communicated to users (both personal and third parties accounts) via mail at least 1 day before.
+
+\subsubsection{Availability}
+In order to guarantee high degree of availability, system of redundant servers may be considered. In this way, if possibly one server fails, the other one will be ready to take over. The system is expected to be
+available 99.99\% of the time.
+
+\subsubsection{Security}
+Users' credentials and payments informations should be confidentially stored and encrypted. Security of the data and of the communications between users and app is a primary concern.
+
+\subsubsection{Maintainability}
+In order to guarantee a good maintainability of the app, the code will be simplified as much as possible, and always commented both with natural language (english) and a first order logic based language (when possible). Design patterns will be used and all the documentation will be provided. Furthermore, the app will always been tested before a new release and changelogs will be generated for each new version of the system.
+
+\subsubsection{Compatibility}
+\begin{itemize}
+\item Android versions supported: 5.0 (Lollipop) and following.
+\item iOS versions supported: iOS 7 and following.
+\item WearOS (related to Android watches) and watchOS (related to Apple watches) supported in all versions.
+\end{itemize}
 
 %\end{document}
