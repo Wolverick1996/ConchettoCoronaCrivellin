@@ -14,14 +14,36 @@ A view of the relations that intervene among concepts that will be at the base o
 \end{center}
 
 A central role is performed by data that can tell the user and third parties about his/her status. Besides data management (with a semi-passive role for the user), the application is about running races and allows persons to enter in contact with each other watching or organizing them. Finally, we can see different types of data, races and surveys, that requires different interactions with users. \newpage
-
 As the running race management is one of the most complex services among those offered to be understood in its phases, here's a specification of them.
 
 \begin{center}
-\includegraphics[scale=0.4]{sections/diagrams/stateDiagram.png}
+\includegraphics[scale=0.6]{sections/diagrams/stateDiagram.png}
 \end{center}
 
 \subsection{Product functions}
+The requirements of all services dealt with above can be grouped in the following system's main functions.
+
+\subsubsection{Data collection and updating}
+This function is the one on which is based Data4Help service and that is exploited by the other two services. For a generic user (not a third party), data are collected through a form during the registration phase and subsequently through automatic update.
+
+This takes place through the sensors and the GPS system of the wearable device on which the service is active, which update the health status and position of the user. These data collected in real-time are the ones that AutomatedSOS needs (if the user is subscribed at it) to call for help if the user's health is in a state of emergency. Data inherent only to localization will be instead fundamental to allow the service Run4Track to let other users follow the runners' movements during the race.
+
+\subsubsection{Data exchange with external entities}
+Complementary to the previous one, this function deals with the management of those aspects that affect third parties and those that allow completing AutomataSOS service.
+
+Data4Help is in fact thought to give a service to third parties: companies, research institutes, and whatever entity could be interested in getting hold of data of a person for some reason (such as leading surveys or sending specific advertising to some groups of people). Third parties, after being adequately identified through a code agreed with the company TrackMe, can obtain two types of data from the service: specific individuals ones or anonymized ones.
+
+In order to obtain data of specific individuals, in which the survey's object can be considered identifiable, a third party can search through a search dialog or filters an individual or a group of fewer than 1000 persons. Then, Data4Help creates a request for use of data that the interested users will receive as a notification. Only after receiving their consent Data4Help will allow the third party to receive those data, updated from time to time.
+
+If the third party wants to lead an anonymized survey instead, the application doesn't need the users' consent and it gives automatically data of groups of users of more than 1000 persons.\newline
+Regarding AutomatedSOS, once a situation of emergency is ascertained, the application is capable, thanks to the data collected and the agreement with emergency services in Europe and USA, of providing an immediate and accurate help service. 
+
+\subsubsection{Run management} 
+Here "management" is intended to indicate the management of a running race led by a user, who is allowed by the application to organize it and update its status. In fact, the user is able to organize a new race through a form and an external map service.
+
+The organizer can optionally indicate in the form other organizers, who will help in the race management, once the initial phase of race profiling is completed. After the event is created, every organizer has the possibility to postpone the race before its begin and to cancel it before its end. Other two actions can be performed by the organizers: sign a runner as "present" at the race and as "disqualified" with respect to its rules. Those two actions can be very useful to be performed by several persons, especially during races of certain dimensions. Furthermore, those flags will be fundamental for the race monitoring of other users.\newline
+During the form compilation, the user has to specify if the race will be open or by invitation, in order to create respectively the public announcement or the link to a registration form.
+
 \subsection{User characteristics}
 \subsection{Assumptions, dependencies and constraints}
 [D1] - Third parties own an alphanumerical code received from a TrackMe administrator used to verify their identities and match them with the company account. \newline
