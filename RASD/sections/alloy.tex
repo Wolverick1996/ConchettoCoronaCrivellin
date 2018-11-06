@@ -1,0 +1,55 @@
+%\documentclass[11pt]{article}
+%\usepackage{fullpage}
+%\usepackage{graphicx}
+
+%\begin{document}
+In this section, the Alloy model is given. Using it, some of the features of the system are specified and explained in more details, with the focus being on the constraints:
+\begin{itemize}
+\item The organizer must create a "valid" competition: track with well-defined start and finish, well-defined intermediate stages and type (public or private)
+\item Data sent to a third party must be part of or data of a specific individual or an anonymous group of at least 1000 subjects
+\item %TODO complete this section
+\end{itemize}
+
+\subsection{Alloy model}
+\textbf{open} util/integer\\
+\textbf{open} util/boolean\\
+\\
+\textbf{sig} Stage\verb|{|
+
+coordX: \textbf{one Int},
+
+coordY: \textbf{one Int}\\
+\verb|}|\\
+\verb|{|coordX $\geq$ -90 \textbf{and} coordX $\leq$ 90 \textbf{and} coordY $\geq$ -180 \textbf{and} coordY $\leq$ 180\verb|}|\\
+\\
+\textbf{sig} Track\verb|{|
+
+startPoint: \textbf{one} Stage,
+
+endPoit: \textbf{one} Stage,
+
+interStages: \textbf{set} Stage\\
+\verb|}|\\
+\\
+\textbf{sig} RunType\verb|{ }|\\
+\\
+\textbf{sig} Run\verb|{|
+
+track: \textbf{one} Track,
+
+organizers: \textbf{some} CommUser,
+
+runType: \textbf{one} RunType,
+
+participants: \textbf{some} CommUser,
+
+spectators: \textbf{set} CommUser\\
+\verb|}|\\
+
+\subsection{World generated}
+
+\subsection{Alloy results}
+
+
+
+%\end{document}
