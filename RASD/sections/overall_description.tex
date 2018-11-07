@@ -35,16 +35,31 @@ Data4Help is in fact thought to give a service to third parties: companies, rese
 
 In order to obtain data of specific individuals, in which the survey's object can be considered identifiable, a third party can search through a search dialog or filters an individual or a group of fewer than 1000 persons. Then, Data4Help creates a request for use of data that the interested users will receive as a notification. Only after receiving their consent Data4Help will allow the third party to receive those data, updated from time to time.
 
-If the third party wants to lead an anonymized survey instead, the application doesn't need the users' consent and it gives automatically data of groups of users of more than 1000 persons.\newline
+If the third party wants to lead an anonymized survey instead, the application doesn't need the users' consent and it gives automatically data of groups of users of more than 1000 persons.
+
 Regarding AutomatedSOS, once a situation of emergency is ascertained, the application is capable, thanks to the data collected and the agreement with emergency services in Europe and USA, of providing an immediate and accurate help service. 
 
 \subsubsection{Run management} 
 Here "management" is intended to indicate the management of a running race led by a user, who is allowed by the application to organize it and update its status. In fact, the user is able to organize a new race through a form and an external map service.
 
-The organizer can optionally indicate in the form other organizers, who will help in the race management, once the initial phase of race profiling is completed. After the event is created, every organizer has the possibility to postpone the race before its begin and to cancel it before its end. Other two actions can be performed by the organizers: sign a runner as "present" at the race and as "disqualified" with respect to its rules. Those two actions can be very useful to be performed by several persons, especially during races of certain dimensions. Furthermore, those flags will be fundamental for the race monitoring of other users.\newline
-During the form compilation, the user has to specify if the race will be open or by invitation, in order to create respectively the public announcement or the link to a registration form.
+The organizer can optionally indicate in the form other organizers, who will help in the race management, once the initial phase of race profiling is completed. After the event is created, every organizer has the possibility to postpone the race before its begin and to cancel it before its end. Other two actions can be performed by the organizers: sign a runner as "present" at the race and as "disqualified" with respect to its rules. Those two actions can be very useful to be performed by several persons, especially during races of certain dimensions. Furthermore, those flags will be fundamental for the race monitoring of other users.
 
+During the form compilation, the user has to specify if the race will be open or by invitation, in order to create respectively the public announcement or the link to a registration form.
+ 
+\subsubsection{Data monitoring and consequent actions on them}
+
+The generic user, daily opening the application finds immediately his/her data recorded through the wearable device and notifications (such as the request of data sharing from a company). Naturally, the user can answer the notification as far as required. In another section that can be found through the menù, the user can monitor races to whom he/she subscribed or which are organized by him/her, and next to it he/she finds a list of races in neatness and time order. There the user can subscribe to a race or watch it in real-time.
+
+The display of the race takes place through maps provided by external services and on the shown path there are markers associated with runners signed as "present". On the screen, there's also a leaderboard with the runners' names associated with the markers through a number. It is visible if a runner is disqualified (the marker is blocked where he/she was disqualified and the name is grey).
+ 
 \subsection{User characteristics}
+The system has the following actors:
+\begin{itemize}
+\item Generic user: a person who has a user account through which he/she monitors his/her data and can subscribe to services for emergency automated calls and for joining running races, as well as organizing them;
+\item Third party: a company or association registered agent who can ask for groups' or individuals' data;
+\item Administrator: A TrackMe employee who can make some changes in the forms other actors have to compile.
+\end{itemize}
+
 \subsection{Assumptions, dependencies and constraints}
 [D1] - Third parties own an alphanumerical code received from a TrackMe administrator used to verify their identities and match them with the company account. \newline
 
