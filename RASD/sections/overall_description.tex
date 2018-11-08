@@ -10,7 +10,7 @@ The TrackMe software-based service, Data4Help, has  other two services built on 
 A view of the relations that intervene among concepts that will be at the base of the system is given by the following diagram.
 
 \begin{center}
-\includegraphics[scale=1]{sections/diagrams/class_diagram.jpg}
+\includegraphics[scale=0.5]{sections/diagrams/class_diagram.png}
 \end{center}
 
 A central role is performed by data that can tell the user and third parties about his/her status. Besides data management (with a semi-passive role for the user), the application is about running races and allows persons to enter in contact with each other watching or organizing them. Finally, we can see different types of data, races and surveys, that requires different interactions with users. \newpage
@@ -45,8 +45,21 @@ Here "management" is intended to indicate the management of a running race led b
 The organizer can optionally indicate in the form other organizers, who will help in the race management, once the initial phase of race profiling is completed. After the event is created, every organizer has the possibility to postpone the race before its begin and to cancel it before its end. Other two actions can be performed by the organizers: sign a runner as "present" at the race and as "disqualified" with respect to its rules. Those two actions can be very useful to be performed by several persons, especially during races of certain dimensions. Furthermore, those flags will be fundamental for the race monitoring of other users.
 
 During the form compilation, the user has to specify if the race will be open or by invitation, in order to create respectively the public announcement or the link to a registration form.
+ 
+\subsubsection{Data monitoring and consequent actions on them}
 
+The generic user, daily opening the application finds immediately his/her data recorded through the wearable device and notifications (such as the request of data sharing from a company). Naturally, the user can answer the notification as far as required. In another section that can be found through the menù, the user can monitor races to whom he/she subscribed or which are organized by him/her, and next to it he/she finds a list of races in neatness and time order. There the user can subscribe to a race or watch it in real-time.
+
+The display of the race takes place through maps provided by external services and on the shown path there are markers associated with runners signed as "present". On the screen, there's also a leaderboard with the runners' names associated with the markers through a number. It is visible if a runner is disqualified (the marker is blocked where he/she was disqualified and the name is grey).
+ 
 \subsection{User characteristics}
+The system has the following actors:
+\begin{itemize}
+\item Generic user: a person who has a user account through which he/she monitors his/her data and can subscribe to services for emergency automated calls and for joining running races, as well as organizing them.
+\item Third party: a company or association registered agent who can ask for groups' or individuals' data.
+\item Administrator: A TrackMe employee who can make some changes in the forms other actors have to compile.
+\end{itemize}
+
 \subsection{Assumptions, dependencies and constraints}
 [D1] - Third parties own an alphanumerical code received from a TrackMe administrator used to verify their identities and match them with the company account. \newline
 
