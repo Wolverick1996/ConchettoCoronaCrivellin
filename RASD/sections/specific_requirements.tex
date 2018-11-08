@@ -1,6 +1,7 @@
 %\documentclass[11pt]{article}
 %\usepackage{fullpage}
 %\usepackage{graphicx}
+%\usepackage{adjustbox}
 %\usepackage[font=small, labelfont=bf, skip=1pt]{caption}
 
 %\begin{document}
@@ -76,7 +77,7 @@ The app uses the following communication interfaces:
 Aurora is a non-profit organization that deals with disabled young people. Aurora's board of directors decided to use TrackMe to support medicians in their work and monitor the health status of patients in a more efficient way. Most of the patients, according with their parents, decided to download the app on their smartphone. Aurora's medicians were able to estimate the average course of the heartbeat, blood pressure, body temperature, glucose level and ECG of patients just searching for anonymous data using the age filter (18-21 years old) and the location filter (via Aurora 2, Perugia) and subscribing to the search results.
 
 \subsubsection{Scenario 2}
-Davide is the athletic trainer for the under 21 athletes of Milano Atletica. He decided to organize a competition between his student, so he launched TrackMe and created a new running race in the "Your running races" section, using the "+" button. He selected the location of the sport center (via Cimabue, Milan) and established the date of the race (15/11/2018) and the closing date of the registrations (14/11/2018). He obviously decided to select the partecipants sending them invites to join the competition.
+Davide is the athletic trainer for the under 21 athletes of Milano Atletica. He decided to organize a competition between his student, so he launched TrackMe and created a new running race in the "Your running races" section, using the "+" button. He selected the location of the sport center (via Cimabue, Milan) and established the date of the race (15/11/2018) and the closing date of the registrations (14/11/2018). He obviously decided to select the participants sending them invites to join the competition.
 
 Giovanni, one of his students, immediately joined the competition but unluckily he was not able to compete due to an injury. Through the "MANAGE" option Davide was able to mark him as "disqualified" in order to effectively know the participants in the race and monitor their performances.
 
@@ -122,7 +123,7 @@ One day, during a walk, Lidia felt sick and collapsed on the ground. TrackMe det
 
 [R11] - Third parties can flag an option to subscribe to new data of a specific user when they receive his/her data (the user already allowed the data sharing), or they can subscribe to get results of a research with specific filters as soon as they are produced. \newline
 
-[R12] - Third parties can manage their subscriptions in a management section in the app. \newline
+[R12] - Third parties can manage their subscriptions and set the frequency with which obtaining data for a specific subscription by selecting it and editing preferences. \newline
 
 \hspace{-\parindent}\textbf{[G5] - Allow the users, through the AutomatedSOS service, to come help by an ambulance when such parameters fall below certain thresholds} \newline
 
@@ -136,59 +137,518 @@ One day, during a walk, Lidia felt sick and collapsed on the ground. TrackMe det
 
 \hspace{-\parindent}\textbf{[G6] - Allow racing organizers, through the Track4Run service, to manage runs and define a path for runs} \newline
 
-[R16] - Users can create races by defining name, date, time, start point, stages and arrival point, and selecting the method of partecipation (open or by invitation) and the date and time of expiration for registrations. \newline
+[R16] - Users can create races by defining name, date, time, start point, stages and arrival point, and selecting the method of participation (open or by invitation) and the date and time of expiration for registrations. They can also add other organizers as collaboratos: selected users will receive a notify and they will see the race in their management section. \newline
 
 \hspace{\parindent}[R16.1] - If a race by invitation is selected, a private link to a registration page is generated. \newline
 
-[R17] - The system allows the organizers to sign an enrolled runner as "present" and to disqualify a runner by signing him/her as "disqualified". \newline
+\hspace{\parindent}[R16.2] - The organizer can specify a maximum of 10 stages. \newline
 
-[R18] - Users can manage their orga in a management section in the app. \newline
+\hspace{\parindent}[R16.3] - The distance between start and arrival points (stages included) cannot exceeds 50kms, otherwise a warning popup is shown and the organizer is invited to change at least one of them before continuing. \newline
 
-\hspace{\parindent}[R18.1] - Organizers can postpone or delete a run. A notification is sent to partecipants and spectators. \newline
+[R17] - Organizers can choose one of the routes calculated by the system. \newline
 
-\hspace{-\parindent}\textbf{[G7] - Allow racing partecipants to enroll runs} \newline
+[R18] - The system allows the organizers to sign an enrolled runner as "present" and to disqualify a runner by signing him/her as "disqualified". \newline
 
-[R19] - Users can visualize nearby races or search for a specific run by searching for the name or location of the race. \newline
+[R19] - Users can manage their organizing races in a management section in the app. \newline
+
+\hspace{\parindent}[R18.1] - Organizers can postpone or delete a run. A notification is sent to participants and spectators. \newline
+
+\hspace{-\parindent}\textbf{[G7] - Allow racing participants to enroll runs} \newline
+
+[R20] - Users can visualize nearby races or search for a specific run by searching for the name or location of the race. \newline
 
 [D4] - The run can be joined only by persons enrolled through the app. \newline
 
 [D5] - If it is required a payment to enroll a run, an external service will guarantee secure transactions and receipts by e-mail. \newline
 
-[R20] - Runners can join a race through the race overview by clicking the "Participate" button. For races by invitation the button is visible just to invited users following the registration link. \newline
+[R21] - Runners can join a race through the race overview by clicking the "Participate" button. For races by invitation the button is visible just to invited users following the registration link. \newline
 
 \hspace{\parindent}[R20.1] - If it's specified that some payment is required, it will be committed to an external service. \newline
 
-[R21] - When the race starts, the partecipant have to wear his/her wearable device with Data4Help installed. \newline
+[R22] - When the race starts, the participant have to wear his/her wearable device with Data4Help installed. \newline
 
 \hspace{-\parindent}\textbf{[G8] - Allow racing spectators to see on a map the position of all runners during the run} \newline
 
-[R22] - Users can become spectators of a race through the race overview by clicking the "Observe" button. \newline
+[R23] - Users can become spectators of a race through the race overview by clicking the "Observe" button. \newline
 
-[R23] - For the duration of the race is always possible to see in the event page the map with markers, associated to runners' name through numbers, and a live leaderboard showing names, order numbers and possible disqualifications. \newline
+[R24] - For the duration of the race is always possible to see in the event page the map with markers, associated to runners' name through numbers, and a live leaderboard showing names, order numbers and possible disqualifications. \newline
 
-[R24] - A marker is on the track iff it corresponds to a user enrolled, signed as "present" at the run with his/her wearable device with Data4Help installed and not disqualified. \newline
+[R25] - A marker is on the track iff it corresponds to a user enrolled, signed as "present" at the run with his/her wearable device with Data4Help installed and not disqualified. \newline
 
-[R25] - The track represented is the one chosen by the organizer of the run. \newline
+[R26] - The track represented is the one chosen by the organizer of the run. \newline
 
-[R26] - Markers move according to the corresponding persons' movement, as reported by the location service. \newline
+[R27] - Markers move according to the corresponding persons' movement, as reported by the location service. \newline
 
 \hspace{-\parindent}\textbf{[G9] - Allow users to monitor their own health status} \newline
 
-[R27] - Users can visualize their own health status in the home page section of the app. \newline
+[R28] - Users can visualize their own health status in the home page section of the app. \newline
 \newpage
+
 \subsubsection{Use case diagrams}
-
-\begin{figure}[h!] \ContinuedFloat
+\begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{sections/diagrams/Generic_user.png} \newline
-\captionof{figure}{use case diagram from user's point of view}
+\includegraphics[scale=0.44]{sections/diagrams/Generic_user.png} \newline
+\captionof{figure}{Use case diagram from user's point of view}
 \end{figure}
 
 \begin{figure}[h!] \ContinuedFloat
 \centering
-\includegraphics[scale=0.5]{sections/diagrams/Third_Party.png} \newline
-\captionof{figure}{use case diagram from third party's point of view}
+\includegraphics[scale=0.44]{sections/diagrams/Third_Party.png} \newline
+\captionof{figure}{Use case diagram from third party's point of view}
 \end{figure}
+
+\clearpage
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Sign Up\\ \hline
+\textbf{Actor}            &  User, third party\\ \hline
+\textbf{Entry conditions} &  The user/third party has installed the application on the device\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] Click on the "CREATE AN ACCOUNT" button
+		\item[2.] Fill all the mandatory fields and provide the necessary information
+		\item[3.] Click on the "CONFIRM" button
+		\item[4.] The system sends an e-mail of confirmation to the specified e-mail address and saves the data
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The user/third party has successfully registered and now he/she’s able to use the application\\ \hline
+\textbf{Exceptions}       &
+	\begin{itemize}
+		\item[1.] The user/third party already signed up
+		\item[2.] The user/third party didn’t fill all of the mandatory fields with valid data
+		\item[3.] The username is already taken
+		\item[4.] The e-mail is already registered
+	\end{itemize}
+	All the exceptions are handled by notifying the user/third party and taking him/her back to the sign up activity\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Login\\ \hline
+\textbf{Actor}            &  User, third party\\ \hline
+\textbf{Entry conditions} &  The user/third party is previously successfully signed up and has the application installed on the device\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] Enter credentials in the “Username” and “Password” fields of the home page or choose one between the Google and Facebook autentication buttons
+		\item[2.] Click on the "LOGIN" button [if the choice was to log in manually]
+		\item[3.] The user/third party is successfully logged in his/her profile and the system automatically redirects him/her to the related home page
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The user/third party is successfully redirected to the home page\\ \hline
+\textbf{Exceptions}       &
+	\begin{itemize}
+		\item[1.] The user/third party enters invalid username
+		\item[2.] The user/third party enters invalid password
+	\end{itemize}
+	All the exceptions are handled by notifying the user/third party and taking him/her back to the login 	activity\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Consent to the use of data\\ \hline
+\textbf{Actor}            &  User\\ \hline
+\textbf{Entry conditions} &  The user receives a push notification telling him that a specific third party wants to access to his data\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] Click on the push notification
+		\item[2.] Click on the "I AGREE" button
+		\item[3.] The user successfully allowed the usage of his data and the system redirects him to his home page
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The user is successfully redirected to the home page\\ \hline
+\textbf{Exceptions}       &
+	\begin{itemize}
+		\item[1.] The user swipe away the notification
+	\end{itemize}
+	The exception is handled showing to the user the choice screen at the opening of the app\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Watch a race\\ \hline
+\textbf{Actor}            &  User\\ \hline
+\textbf{Entry conditions} &  The user has already logged in\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] Swipe right to show the side menu
+		\item[2.] Click on the "Running races" voice
+		\item[3.] Search for a specific run using the search button on the upper bar or explore nearby races
+		\item[4.] Click on the "OBSERVE" button
+		\item[5.] The user successfully chose the race to watch and the system saves the race in user's "Observing" section and shows the user the specific running race page
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The system saves the race in user's "Observing" section and shows the user the specific running race page\\ \hline
+\textbf{Exceptions}       &
+	\begin{itemize}
+		\item[1.] The user can't find the race he is searching for
+	\end{itemize}\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Create a race\\ \hline
+\textbf{Actor}            &  User\\ \hline
+\textbf{Entry conditions} &  The user has already logged in\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] Swipe right to show the side menu
+		\item[2.] Click on the "Running races" voice
+		\item[3.] Click on the "+" button
+		\item[4.] Fill all the mandatory fields (name of the competition, date, time, start point, arrival point, date and time of expiration for registrations)
+		\item[5.] Choose one of the purposed routes
+		\item[6.] Choose between open or by invitation race selecting the corresponding radio button
+		\item[7.] Click on the "CONFIRM" button
+		\item[8.] Select people to invite choosing them from the list which appears [if the choice was the by invitation race]
+		\item[9.] Click on the "CONTINUE" button [if the choice was the by invitation race]
+		\item[10.] The user successfully created the race and the system saves the race in user's "Organizing" section and shows the user the specific running race page
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The system saves the race in user's "Organizing" section and shows the user the specific running race page\\ \hline
+\textbf{Exceptions}       &
+	\begin{itemize}
+		\item[1.] The user didn’t fill all of the mandatory fields with valid data
+		\item[2.] The distance between start and arrival point exceeds 50kms
+	\end{itemize}
+	All the exceptions are handled by notifying the user and inviting him to modify data\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Manage a race\\ \hline
+\textbf{Actor}            &  User\\ \hline
+\textbf{Entry conditions} &  The user has already logged in and he wants to modify a running race previously created\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] Swipe right to show the side menu
+		\item[2.] Click on the "Running races" voice
+		\item[3.] Switch to the "YOUR RACES" tab
+		\item[4.] If the choice is to delete a race click on the "DELETE" button, otherwise click on the "MANAGE" button
+		\item[5.] Modify the information which need to be changed editing the relative field: start point, stages, arrival point, date, time, date and time of expiration for registrations, or choose a participant and click on the "DISQUALIFY" button to mark him as "disqualified" [if the chose was to manage]
+		\item[6.] Click on the "CONFIRM" button [if the chose was to manage]
+		\item[7.] The user successfully deleted/modified the race and the system shows the user the specific running race page
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The system shows the user the specific running race page or the "YOUR RACES" tab if the choice was to delete the race\\ \hline
+\textbf{Exceptions}       &
+	\begin{itemize}
+		\item[1.] The user didn’t fill all of the mandatory fields with valid data
+		\item[2.] The distance between start and arrival point exceeds 50kms
+	\end{itemize}
+	All the exceptions are handled by notifying the user and inviting him to modify data\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Subscribe to a race\\ \hline
+\textbf{Actor}            &  User\\ \hline
+\textbf{Entry conditions} &  The user has already logged in\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] Swipe right to show the side menu
+		\item[2.] Click on the "Running races" voice
+		\item[3.] Search for a specific run using the search button on the upper bar or explore nearby races
+		\item[4.] Click on the "PARTICIPATE" button
+		\item[5.] If a payment is required it's necessary to provide it
+		\item[6.] The user successfully chose the race to join and the system saves the race in user's "Participating" section and shows the user the specific running race page
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The system saves the race in user's "Participating" section and shows the user the specific running race page\\ \hline
+\textbf{Exceptions}       &
+	\begin{itemize}
+		\item[1.] The user can't find the race he is searching for
+	\end{itemize}\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Subscribe to AutomatedSOS\\ \hline
+\textbf{Actor}            &  User\\ \hline
+\textbf{Entry conditions} &  The user has already logged in\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] Swipe right to show the side menu
+		\item[2.] Click on the "Settings" voice
+		\item[3.] Scroll the page searching for the checkbox related to the AutomatedSOS subscription
+		\item[4.] Select the checkbox
+		\item[5.] Click on the "SAVE" button to save preferences
+		\item[6.] The user successfully subscribed to AutomatedSOS and the system automatically redirects him to the home page
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The user is successfully redirected to the home page\\ \hline
+\textbf{Exceptions}       &  /\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Choose a path\\ \hline
+\textbf{Actor}            &  User\\ \hline
+\textbf{Entry conditions} &  The user is organizing a running race and he has already set correctly start and arrival point\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] The user chooses one of the listed tracks
+		\item[2.] The system saves the data
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The chosen path is saved as track for the race\\ \hline
+\textbf{Exceptions}       &  /\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Payment transaction\\ \hline
+\textbf{Actor}            &  User\\ \hline
+\textbf{Entry conditions} &  The user has already logged in and wants to participate to a running race which requires a payment subscription\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] The user chooses what kind of payment he wants to make
+		\item[2.] The user provides the system with all the required information for making a 	payment
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The payment is successful\\ \hline
+\textbf{Exceptions}       &
+	\begin{itemize}
+		\item[1.] The user did not enter a valid data
+	\end{itemize}\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Send an ambulance\\ \hline
+\textbf{Actor}            &  TrackMe\\ \hline
+\textbf{Entry conditions} &  Some of the health status parameters of the user fall below specific thresholds (hearth rate, blood pressure, body temperature)\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] The app transcript data about location and health status as a textual message
+		\item[2.] Using the GPS coordinates, the app recognizes the phone number to contact (112 or 911)
+		\item[3.] The app calls the phone number and concurrently sends user's data via SMS
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  Someone answers the call\\ \hline
+\textbf{Exceptions}       &  /\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Calculate the path\\ \hline
+\textbf{Actor}            &  TrackMe\\ \hline
+\textbf{Entry conditions} &  The user wants to participate to a running race and has already selected start point and arrival point (and optionally intermediate stages)\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] The app gathers all the information provided by external map services
+		\item[2.] The app calculates routes according with user's specifications
+		\item[3.] The system saves the data
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The calculated routes are presented to the user\\ \hline
+\textbf{Exceptions}       &  /\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Show the path\\ \hline
+\textbf{Actor}            &  TrackMe\\ \hline
+\textbf{Entry conditions} &  The user clicks on a running race\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] The app gathers all the information provided by external map services
+		\item[2.] Comparing date and time of the event with actual date and time, the app shows:
+		\begin{itemize}
+		\item An empty leaderboard and an empty track if the actual date and time precede those of the expiration for registrations
+		\item The leaderboard with participants' info and their markers at the start point of the track if the actual date and time preced those of the race
+		\item The leaderboard with participants' info and their markers at the arrival point of the track if the actual date and time follow those of the end of the race
+		\item If the race is in progress, the app gathers all the information about participants' position provided by their devices and shows their markers moving on the track, upgrading the leaderboard
+		\end{itemize}
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The race screen is correctly shown\\ \hline
+\textbf{Exceptions}       &
+	\begin{itemize}
+		\item[1.] One or more users' devices are broken and can't provide an accurate GPS position
+	\end{itemize}
+	The exception is managed leaving user's marker in the position of the last correct measurement and considering him as stopped (organizators will manually adjust the leaderboard in the end)\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Subscribe to specific individuals data\\ \hline
+\textbf{Actor}            &  Third party\\ \hline
+\textbf{Entry conditions} &  The third party has already logged in\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] Search for a fiscal code using the search bar in the home page
+		\item[2.] Click on the username associated with the searched fiscal code
+		\item[3.] Click on the "OK" button in the confirmation message which is displayed
+		\item[4.] The system sends a push notification to the selected user, who can accept or refuse the sharing of his data
+		\item[5.] Click on the push notification received from the user to view his fist data if he had consented, or the rejection message otherwise
+		\item[6.] Choose the radio button corresponding to the frequency with which obtaining data from the user (once every hour, day, week or month) [if the user allowed the data sharing]
+		\item[7.] Click on the "SAVE" button [if the user allowed the data sharing]
+		\item[8.] The system saves a link to the users' data in third party's "Your subscriptions" section of the home page [if the user allowed the data sharing] and redirects the third party to the home page
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The system saves a link to the users' data in third party's "Your subscriptions" section and redirects the third party to the home page successfully\\ \hline
+\textbf{Exceptions}       &
+	\begin{itemize}
+		\item[1.] The fiscal code doesn't exist in the data base
+		\item[2.] The user refuses the data sharing
+	\end{itemize}\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Subscribe to anonymized groups data\\ \hline
+\textbf{Actor}            &  Third party\\ \hline
+\textbf{Entry conditions} &  The third party has already logged in\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] Select one of the suggested search filters in the home page by clicking it
+		\item[2.] Set the filter specifying the data (e.g. "Milan" for the location filter)
+		\item[3.] [Optional] Repeat the previous steps choosing other filters
+		\item[4.] Scroll the page and select one of the displayed results
+		\item[5.] Choose the radio button corresponding to the frequency with which obtaining data from the group (once every hour, day, week or month) in the confirmation message which is displayed
+		\item[6.] Click on the "SUBSCRIBE" button in the confirmation message
+		\item[7.] The system saves a link to the group's data in third party's "Your subscriptions" section of the home page and redirects the third party to the home page
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The system saves a link to the group's data in third party's "Your subscriptions" section and redirects the third party to the home page successfully\\ \hline
+\textbf{Exceptions}       &
+	\begin{itemize}
+		\item[1.] No groups are shown (there are less then 1000 results and a group can't be created)
+	\end{itemize}\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Send data request\\ \hline
+\textbf{Actor}            &  TrackMe\\ \hline
+\textbf{Entry conditions} &  A third party has already selected a user from which to obtain data\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] The app retrieves the user's profile from the data base
+		\item[2.] The app creates an association table with the request and the user's profile
+		\item[3.] The app sends to the user a push notification
+		\item[4.] Once the user clicks the button corresponding to his decision to share or not his data, the app retrieves the third party's profile from the request using the association table
+		\item[5.] The system sends to the third party a push notification with user's data or with a message of refuse
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The third party receives successfully the push notification\\ \hline
+\textbf{Exceptions}       &  /\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Log in\\ \hline
+\textbf{Actor}            &  Administrator\\ \hline
+\textbf{Entry conditions} &  /\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] The administrator enters his/her credentials in the “Username” and “Password” fields of the home page
+		\item[2.] The administrator clicks on the "LOGIN" button
+		\item[3.] The administrator is successfully logged in his/her profile and the system automatically redirects him/her to the related home page
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The administrator is successfully redirected to the options menu\\ \hline
+\textbf{Exceptions}       &
+	\begin{itemize}
+		\item[1.] The administrator enters invalid username
+		\item[2.] The administrator enters invalid password
+	\end{itemize}
+	All the exceptions are handled by notifying the administrator and taking him/her back to the login 	activity\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\footnotesize
+\begin{tabular}{|p{0.17\textwidth}|p{0.83\textwidth}|}
+\hline
+\textbf{Name}             &  Change forms\\ \hline
+\textbf{Actor}            &  Administrator\\ \hline
+\textbf{Entry conditions} &  The administrator has already logged in\\ \hline
+\textbf{Events flow}      &
+	\begin{itemize}
+		\item[1.] The administrator opens the option menu
+		\item[2.] The administrator chooses the option "Change forms"
+		\item[3.] The administrator selects one form to modify
+		\item[4.] The administrator can add/remove/modify fields and buttons
+		\item[5.] The administrator clicks on the "SAVE" button
+		\item[6.] The administrator clicks on the "PROCEED" button in the confirmation message which is displayed
+		\item[7.] The system saves the data
+	\end{itemize}\\ \hline
+\textbf{Exit conditions}  &  The selected form is modified\\ \hline
+\textbf{Exceptions}       &  /\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\clearpage
 
 \subsection{Performance requirements}
 The system is provided to serve fairly great number of users simultaneously. Because of the nature of the application, especially for what concerns the AutomatedSOS service, we have to guarantee quick, reactive and correct responses. When health status parameters fall below certain thresholds the app guarantees a reaction time of less then 5 seconds to contact the NUE (or 911).

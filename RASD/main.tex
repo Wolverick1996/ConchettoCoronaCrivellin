@@ -1,6 +1,8 @@
 \documentclass[11pt]{article}
 \usepackage{fullpage}
 \usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{hyperref}
 \usepackage[font=small, labelfont=bf, skip=1pt]{caption}
 
 \begin{document}
@@ -13,9 +15,9 @@
 	\textsc{\Large A.Y. 2018/2019}\\[2.0 cm]
 	\textsc{\LARGE TrackMe}\\[0.5 cm]
 	\rule{\linewidth}{0.2 mm}\\[0.4 cm]
-	{\huge \bfseries RASD}\\[0.4cm]
+	{\huge \bfseries RASD}\\[0.4 cm]
 
-	\rule{\linewidth}{0.2 mm} \\[1.5 cm]
+	\rule{\linewidth}{0.2 mm}\\[1.5 cm]
 
 	\begin{minipage}{0.4\textwidth}
 		\begin{flushleft} \large
@@ -25,7 +27,7 @@
 	\end{minipage}~
 	\begin{minipage}{0.4\textwidth}
 		\begin{flushright} \large
-			\emph{Submitted by:} \\
+			\emph{Submitted by:}\\
 			Claudia Conchetto\\
 			Riccardo Corona\\
 			Andrea Crivellin\\
@@ -38,7 +40,6 @@
 
 \section{Introduction}
 \input{sections/introduction.tex}
-%\subfile{}
 
 \clearpage
 \section{Overall description}
@@ -51,7 +52,6 @@
 \clearpage
 \section{Formal analysis using Alloy}
 \input{sections/alloy.tex}
-%\subfile{}
 
 \clearpage
 \section{Effort spent}
@@ -59,6 +59,6 @@
 
 \clearpage
 \section{References}
-%\subfile{}
+\input{sections/references.tex}
 
 \end{document}
