@@ -13,12 +13,15 @@ A view of the relations that intervene among concepts that will be at the base o
 \includegraphics[scale=0.5]{sections/diagrams/class_diagram.png}
 \end{center}
 
-A central role is performed by data that can tell the user and third parties about his/her status. Besides data management (with a semi-passive role for the user), the application is about running races and allows persons to enter in contact with each other watching or organizing them. Finally, we can see different types of data, races and surveys, that requires different interactions with users. \newpage
+A central role is performed by the generic user and by data that can tell him/her and third parties about his/her status. Besides data management (with a semi-passive role for the generic user), the application is about running races and it allows generic users to enter in contact with each other watching or organizing them. Finally, we can see different types of data, races and surveys, that requires different interactions with users.
+
 As the running race management is one of the most complex services among those offered to be understood in its phases, here's a specification of them.
 
 \begin{center}
 \includegraphics[scale=0.6]{sections/diagrams/stateDiagram.png}
 \end{center}
+
+In order to know how to behave consequently to the organization form filling, it is required to indicate if the running race will be open or by invitation. After this first part the run enters in a state in which it is allowed to cancel it until it's end is reached.
 
 \subsection{Product functions}
 The requirements of all services dealt with above can be grouped in the following system's main functions.
@@ -44,7 +47,7 @@ Here "management" is intended to indicate the management of a running race led b
 
 The organizer can optionally indicate in the form other organizers, who will help in the race management, once the initial phase of race profiling is completed. After the event is created, every organizer has the possibility to postpone the race before its begin and to cancel it before its end. Other two actions can be performed by the organizers: sign a runner as "present" at the race and as "disqualified" with respect to its rules. Those two actions can be very useful to be performed by several persons, especially during races of certain dimensions. Furthermore, those flags will be fundamental for the race monitoring of other users.
 
-During the form compilation, the user has to specify if the race will be open or by invitation, in order to create respectively the public announcement or the link to a registration form.
+During the form compilation, the user has to specify if the race will be open or by invitation, in order to create respectively the public announcement or private links to a registration form.
  
 \subsubsection{Data monitoring and consequent actions on them}
 
@@ -55,9 +58,9 @@ The display of the race takes place through maps provided by external services a
 \subsection{User characteristics}
 The system has the following actors:
 \begin{itemize}
-\item Generic user: a person who has a user account through which he/she monitors his/her data and can subscribe to services for emergency automated calls and for joining running races, as well as organizing them.
-\item Third party: a company or association registered agent who can ask for groups' or individuals' data.
-\item Administrator: A TrackMe employee who can make some changes in the forms other actors have to compile.
+\item \textbf{Generic user}: a person who has a user account through which he/she monitors his/her data and can subscribe to services for emergency automated calls and for joining running races, as well as organizing them.
+\item \textbf{Third party}: a company or association registered agent who can ask for groups' or individuals' data.
+\item \textbf{Administrator}: A TrackMe employee who can make some changes in the forms other actors have to compile.
 \end{itemize}
 
 \subsection{Assumptions, dependencies and constraints}
