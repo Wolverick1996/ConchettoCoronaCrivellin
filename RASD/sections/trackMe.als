@@ -14,7 +14,7 @@ trackLenght: one Int,
 stages: set Position
 }
 {((startPoint.coordX = endPoint.coordX and startPoint.coordY = endPoint.coordY) implies #stages > 0) and
-	(trackLenght > 0 and trackLenght =< 7) and
+	(trackLenght > 0 and trackLenght =< 7) and (#stages =< 7) and
 	(#stages > 0 implies (startPoint not in stages and endPoint not in stages))}
 
 abstract sig Data{}
