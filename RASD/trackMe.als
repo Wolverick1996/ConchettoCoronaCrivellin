@@ -14,39 +14,43 @@ trackLenght: one Int,
 stages: set Position
 }
 {((startPoint.coordX = endPoint.coordX and startPoint.coordY = endPoint.coordY) implies #stages > 0) and
-(trackLenght > 0 and trackLenght =< 50)}
+(trackLenght > 0 and trackLenght =< 7)}
 
 abstract sig Data{}
 
 sig BPM extends Data{
-value: one Int
-thrMax: one Int
+value: one Int,
+thrMax: one Int,
 thrMin: one Int
 }
+{(value > 0 and value < 7) and (thrMax > 0 and thrMax < 7) and (thrMax > 0 and thrMax < 7)}
 
 sig BloodPressure extends Data{
-value: one Int
-thrMax: one Int
+value: one Int,
+thrMax: one Int,
 thrMin: one Int
 }
+{(value > 0 and value < 7) and (thrMax > 0 and thrMax < 7) and (thrMax > 0 and thrMax < 7)}
 
 sig Steps extends Data{}
 
 sig Temperature extends Data{}
 
 sig Glucose extends Data{
-value: one Int
-thrMax: one Int
+value: one Int,
+thrMax: one Int,
 thrMin: one Int
 }
+{(value > 0 and value < 7) and (thrMax > 0 and thrMax < 7) and (thrMax > 0 and thrMax < 7)}
 
 sig IdentifyingData extends Data{}
 
 sig GenericUser{
-dataCollected: one UserData,
+dataCollected: one UsersData,
 personalData: one IdentifyingData,
 surveysAllowed: set SpecificIndividualsDataSurvey,
-notifications: set Notifications
+notifications: set Notification,
+runsScheduled: set Run
 }
 
 sig UsersData{
@@ -58,28 +62,32 @@ glucoseUser: one Glucose,
 locationUser: one Position,
 }
 
+sig Athlete{
+userAthlete: one GenericUser,
+disqualified: one Bool,
+attendant: one Bool
+}
+
+sig SurveyID{}
+
 abstract sig Survey{
-surveyID: one Int,
+surveyID: one SurveyID,
 involvedThirdParty: one ThirdParty,
 researchResult: one Int
 }
-{researchResult > 0}
+{researchResult > 0 and researchResult < 7}
 
 sig AnonymizedDataSurvey extends Survey{
-genericData: set UserData
+genericData: set UsersData
 }
-{researchResult > 3}
+{researchResult > 3 and #genericData = researchResult}
 
 sig SpecificIndividualsDataSurvey extends Survey{
 specificData: set GenericUser
 }
-{researchResult =< 3}
+{researchResult =< 3 and #specificData = researchResult}
 
 abstract sig Notification{}
-
-sig SignedOutFromSurvey extends Notification{
-userInvolved: one User
-}
 
 sig SignedInASurvey extends Notification{
 surveyInvolved: one Survey
@@ -88,7 +96,7 @@ surveyInvolved: one Survey
 sig Warning extends Notification{}
 
 sig CallAmbulanceWarning extends Warning{
-userWhoNeedsHelp: one User
+userWhoNeedsHelp: one GenericUser,
 warningID: one WarningID
 }
 
@@ -96,16 +104,28 @@ sig WarningID{}
 
 sig ThirdParty{
 anonymSurveysCarriedOut: set AnonymizedDataSurvey,
-specificSurveyCarriedOut: set SpecificIndividualsDataSurvey,
-notifications: set Notification
+specificSurveyCarriedOut: set SpecificIndividualsDataSurvey
 }
 
 sig EmergencyDispatcher{
 warnings: set Warning,
 }
 
---TODO TRACK4RUN
--------------------------------------------------------------------
+abstract sig Run{
+track: one Track,
+organizer: some GenericUser,
+spectators: set GenericUser,
+activeAth: set Athlete,
+subscribedAth: set Athlete
+}
+
+sig ByInvitationRun extends Run{
+invitatedAthletes: set Athlete
+}
+
+sig OpenRun extends Run{}
+
+--------------------------------------------------------------------
 
 fact SurveysIdAreUnique{
 no disj ss1, ss2: SpecificIndividualsDataSurvey|no disj as1, as2: AnonymizedDataSurvey|
@@ -113,12 +133,20 @@ no disj ss1, ss2: SpecificIndividualsDataSurvey|no disj as1, as2: AnonymizedData
 	 ss1.surveyID = as2.surveyID and  ss2.surveyID = as2.surveyID and  as1.surveyID = ss2.surveyID)
 }
 
+fact WarningIDAreUnique{
+no disj  caw1, caw2: CallAmbulanceWarning| caw1.warningID = caw2.warningID
+}
+
+fact IdentifyingDataAreUnique{
+no disj usr1, usr2: GenericUser| usr1.personalData = usr2.personalData
+}
+
 fact NotificationSentToUserCausedBySurvey{
 all user: GenericUser, specificSurvey:  SpecificIndividualsDataSurvey|
- 	(user in specificSurvey implies
-		 (one sn1:  SignedInASurvey| sn1 in user.notifications and sn1.survey.surveyID = specificSurvey.surveyID)) and
-	(user not in specificSurvey implies
-		(no sn2: SignedInASurvey| sn2 in user.notifications and sn2.survey.surveyID = specificSurvey.surveyID))
+ 	(user in specificSurvey.specificData implies
+		 (one sn1:  SignedInASurvey| sn1 in user.notifications and sn1.surveyInvolved.surveyID = specificSurvey.surveyID)) and
+	(user not in specificSurvey.specificData implies
+		(no sn2: SignedInASurvey| sn2 in user.notifications and sn2.surveyInvolved.surveyID = specificSurvey.surveyID))
 }
 
 --TODO SIGNED OUT FUNCTION
@@ -133,7 +161,25 @@ fact EmergencyDispathcerGetCallAmbulanceWarning{
 all user: GenericUser| 
 	(	(user.dataCollected.bpmUser.value < user.dataCollected.bpmUser.thrMin or user.dataCollected.bpmUser.value > user.dataCollected.bpmUser.thrMax) or
 		(user.dataCollected.bloodPressureUser.value < user.dataCollected.bloodPressureUser.thrMin or user.dataCollected.bloodPressureUser.value > user.dataCollected.bloodPressureUser.thrMax) or
-		(user.dataCollectedglucoseUser.value < user.dataCollected.glucoseUser.thrMin or user.dataCollected.glucoseUser.value > user.dataCollected.glucoseUser.thrMax)	) iff
+		(user.dataCollected.glucoseUser.value < user.dataCollected.glucoseUser.thrMin or user.dataCollected.glucoseUser.value > user.dataCollected.glucoseUser.thrMax)	) iff
 	(one ed: EmergencyDispatcher, aw: CallAmbulanceWarning| aw in ed.warnings and user in aw.userWhoNeedsHelp)
 }
 
+fact DisqualifiedUsersAreNotActive{
+(all opr: OpenRun| all ath1: Athlete| ath1 in opr.activeAth and (isTrue[ath1.attendant] and not isTrue[ath1.disqualified]))
+ and (all  bir: ByInvitationRun|  all ath2: Athlete| ath2 in bir.activeAth and (isTrue[ath2.attendant] and not isTrue[ath2.disqualified]))
+}
+
+fact AthletesAreUnique{
+(all opr: OpenRun| no disj ath1, ath2: Athlete| ath1.userAthlete.personalData = ath2.userAthlete.personalData and (ath1 in opr.subscribedAth and ath2 in opr.subscribedAth)) and
+	(all bir: ByInvitationRun|  no disj ath1, ath2: Athlete| ath1.userAthlete.personalData = ath2.userAthlete.personalData and (ath1 in bir.subscribedAth and ath2 in bir.subscribedAth))
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+pred showData4Help{
+(some u: GenericUser| #u.surveysAllowed > 0 and #u.surveysAllowed = #u.notifications and #u.runsScheduled = 0) and
+(some thp: ThirdParty| #thp.anonymSurveysCarriedOut > 0 and # thp.specificSurveyCarriedOut > 0)
+}
+
+run showData4Help for 3 but 3 GenericUser, 1 ThirdParty, 1  AnonymizedDataSurvey, 2 SpecificIndividualsDataSurvey
