@@ -178,8 +178,11 @@ fact AthletesAreUnique{
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
 pred showData4Help{
-(some u: GenericUser| #u.surveysAllowed > 0 and #u.surveysAllowed = #u.notifications and #u.runsScheduled = 0) and
-(some thp: ThirdParty| #thp.anonymSurveysCarriedOut > 0 and # thp.specificSurveyCarriedOut > 0)
+(all u: GenericUser| #u.surveysAllowed > 0 and #u.surveysAllowed = #u.notifications and #u.runsScheduled = 0) and
+(all thp: ThirdParty| #thp.anonymSurveysCarriedOut > 0 and # thp.specificSurveyCarriedOut > 0) and
+(all bpm: BPM| bpm.value = 3 and bpm.thrMax = 6 and bpm.thrMin = 1) and
+(all bp: BloodPressure| bp.value = 3 and bp.thrMax = 6 and bp.thrMin = 1) and
+(all gl: Glucose| gl.value = 3 and gl.thrMax = 6 and gl.thrMin = 1) 
 }
 
-run showData4Help for 3 but 3 GenericUser, 1 ThirdParty, 1  AnonymizedDataSurvey, 2 SpecificIndividualsDataSurvey
+run showData4Help for 3 but 3 GenericUser, 1 ThirdParty, 1  AnonymizedDataSurvey, 2 SpecificIndividualsDataSurvey, 1 EmergencyDispatcher
