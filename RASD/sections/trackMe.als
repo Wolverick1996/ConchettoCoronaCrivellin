@@ -84,12 +84,12 @@ researchResult: one Int
 sig AnonymizedDataSurvey extends Survey{
 genericData: set UsersData
 }
-{researchResult > 3 and #genericData = researchResult}
+{researchResult > 2 and #genericData = researchResult}
 
 sig SpecificIndividualsDataSurvey extends Survey{
 specificData: set GenericUser
 }
-{researchResult =< 3 and #specificData = researchResult}
+{researchResult =< 2 and #specificData = researchResult}
 
 abstract sig Notification{}
 
@@ -198,15 +198,19 @@ fact BPMExistInSthElse{all bpm: BPM| some ud: UsersData|
 
 fact BloodPressExistInSthElse{all blp: BloodPressure| some ud: UsersData|
 	blp in ud.bloodPressureUser}
+
+
+fact GlucoseExistInSthElse{all g: Glucose| some ud: UsersData|
+	g in ud.glucoseUser}
 --------------------------------------------------------------------------------------------
 
 pred show{
 all u: GenericUser| some t: ThirdParty| some sp: SpecificIndividualsDataSurvey|
 	 (sp.specificData = u and sp.involvedThirdParty = t)
+#GenericUser = 3
+#AnonymizedDataSurvey = 1
 }
 
 --------------------------------------------------------------------------------------------
 
-run show for 5 but
-	2 GenericUser, 2 ThirdParty, 2 SpecificIndividualsDataSurvey,
-	1 EmergencyDispatcher, 1 Run
+run show for 5 but 1 Run, 1 EmergencyDispatcher, 1 CallAmbulanceWarning, 1 
