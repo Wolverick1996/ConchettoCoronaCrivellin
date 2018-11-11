@@ -43,7 +43,7 @@ thrMin: one Int
 }
 {(value > 0 and value < 7) and (thrMax > 0 and thrMax < 7) and (thrMin > 0 and thrMin < 7) and thrMin < thrMax}
 
-sig IdentifyingData{}
+sig IdentifyingData {}
 
 sig GenericUser{
 dataCollected: one UsersData,
@@ -59,7 +59,7 @@ bloodPressureUser: one BloodPressure,
 stepsUser: one Steps,
 temperatureUser: one Temperature,
 glucoseUser: one Glucose,
-locationUser: one Position,
+locationUser: one Position
 }
 
 sig Athlete{
@@ -145,7 +145,8 @@ fact EmergencyDispathcerGetCallAmbulanceWarning{
 all user: GenericUser| 
 	(	(user.dataCollected.bpmUser.value < user.dataCollected.bpmUser.thrMin or user.dataCollected.bpmUser.value > user.dataCollected.bpmUser.thrMax) or
 		(user.dataCollected.bloodPressureUser.value < user.dataCollected.bloodPressureUser.thrMin or user.dataCollected.bloodPressureUser.value > user.dataCollected.bloodPressureUser.thrMax) or
-		(user.dataCollected.glucoseUser.value < user.dataCollected.glucoseUser.thrMin or user.dataCollected.glucoseUser.value > user.dataCollected.glucoseUser.thrMax)	) iff
+		(user.dataCollected.glucoseUser.value < user.dataCollected.glucoseUser.thrMin or user.dataCollected.glucoseUser.value > user.dataCollected.glucoseUser.thrMax)
+	) iff
 	(one ed: EmergencyDispatcher, aw: CallAmbulanceWarning| aw in ed.warnings and user in aw.userWhoNeedsHelp)
 }
 
