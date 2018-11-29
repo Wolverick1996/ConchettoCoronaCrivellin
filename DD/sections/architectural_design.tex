@@ -1,0 +1,63 @@
+%\documentclass[11pt]{article}
+%\usepackage{fullpage}
+
+%\begin{document}
+
+\subsection{Overview}
+
+\subsection{High Level Components}
+The main high level components of the system are:
+
+\begin{itemize}
+\item \textbf{Database}: The system data layer; it includes all structures and entities responsible for data storage and management. No application logic is found at this level, apart from the DBMS one that must guarantee the correct functioning of the data structures while assuring the ACID properties of transactional databases.
+
+\item \textbf{Application Server}: This layer encloses all the logic for the system applications, including the logic needed to interface with external systems and the key algorithms.
+
+\item \textbf{Mobile App Interface}: The client layer dedicated to mobile devices; it communicates directly with the application server and only includes presentation logic.
+
+\item \textbf{Script Interface}:  The client layer dedicated to third parties who need to get huge quantities of data: our application doesn't provide other visual interfaces besides the mobile one, but we allow companies to get data through scripts and HTTPS requests providing them libraries to include in order to allow the communication (authentication always required). The layer communicates directly with the application server.
+\end{itemize}
+
+The described components are structured in three layers, as shown in the following figure. It also includes the interaction with external systems, that is intended to happen at the level of the Application Server.
+
+\begin{center}
+\includegraphics[scale=0.7]{sections/diagrams/layers.png}
+\newline
+\captionof{figure}{Logical layers of the system}
+\end{center}
+
+External systems are shown more in detail in the following figure: an high level overview of the system components.
+
+\begin{center}
+\includegraphics[scale=0.6]{sections/diagrams/highlevel.png}
+\newline
+\captionof{figure}{High level components of the system}
+\end{center}
+
+\subsection{Component View}
+\subsubsection{Database}
+
+\subsubsection{Application Server}
+This layer must handle the business logic as a whole, the connections with the Database Layer and the multiple ways of accessing the application from different clients and external systems. The main feature of the Application Server are the specific modules of business logic, which describe business rules and work-flows for each of the functionalities provided by the application itself. \newline
+
+The Application Server must provide a means to interface with the mobile clients via specific APIs in order to decouple the different layers with respect to their individual implementation. Moreover, it must provide a way to communicate with external systems by adapting the application to the existing external infrastructures. \newline
+
+The main business logic modules must include:
+\begin{itemize}
+\item \textbf{UserManager}: This module manages all the logic involved with user account management, login, registration, profile customization and management, as well as the generation and provision of user credentials.
+
+\item \textbf{DataManager}: This module is in charge of the object-relation mapping and dynamic data access and management; this ensures the fact that only the Application Server can access the Database.
+
+\item \textbf{MapManager}: This module includes the logic needed to correctly visualize maps and markers moving on them, and also allows to choose and visualize stages. It must also serve as an interface with the external Maps Provider.
+
+\item \textbf{PaymentGateway}: The logic involved in the computation of final charges is included in this module; moreover, this unit must stand as an interface with the external Payment Gateway upon the act of the automatic payments.
+
+\item \textbf{EmergencyManager}: This module includes the logic needed to manage emergency calls and the sending of SMS. It must also serve as an interface with the external SMS \& Voice Gateway.
+
+\item \textbf{NotificationManager}: This module serves as a gateway from the UserManager module, which needs to send an email to the clients, by managing the logic behind the email notification services. It also manages the logic needed to send and receive push notifications serving as an interface with the external Push Notifications Gateway.
+
+\item \textbf{RunManager}: This module allows users to observe, participate, create and manage running races. It also has to provide and show info about races and it gets data from the MapManager, used to update leaderboards.
+
+\item \textbf{WearableManager}: This module includes the logic needed to communicate with external wearable devices and get data from them. It must also serve as an interface with the external Wearable Handler (e.g. Health app for iOS, Google Fit for Android).
+\end{itemize}
+%\end{document}
