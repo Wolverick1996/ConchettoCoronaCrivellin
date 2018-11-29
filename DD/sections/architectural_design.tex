@@ -36,7 +36,7 @@ External systems are shown more in detail in the following figure: an high level
 
 \subsection{Component View}
 \subsubsection{Database}
-The Database layer interfaces itself only with the Application Server layer, in particular with the DataManager module. Besides the Database Engine, this layer is composed by a DBMS, which is in main part relational. The relational approach offers advantages ranging from the easy extensibility to independency from the physical organization, and in general the ACID properties of its transactions. For all these reasons fixed in front data and those that change less frequently are committed to the RDBMS, while for the others a NoSQL is provided. In fact thanks to its well-known scalability it fits better for data accumulated in large numbers every second, which is the case of all the data collected by the application through the wearable device.
+The Database layer interfaces itself only with the Application Server layer, in particular with the DataHandler module. Besides the Database Engine, this layer is composed by a DBMS, which is in main part relational. The relational approach offers advantages ranging from the easy extensibility to independency from the physical organization, and in general the ACID properties of its transactions. For all these reasons fixed in front data and those that change less frequently are committed to the RDBMS, while for the others a NoSQL is provided. In fact thanks to its well-known scalability it fits better for data accumulated in large numbers every second, which is the case of all the data collected by the application through the wearable device.
 
 The Database layer has to store all the data shown in the following ER diagram, the sensible of which must be encrypted before being stored.
 
@@ -55,7 +55,7 @@ The main business logic modules must include:
 \begin{itemize}
 \item \textbf{UserManager}: This module manages all the logic involved with user account management, login, registration, profile customization and management, as well as the generation and provision of user credentials.
 
-\item \textbf{DataManager}: This module is in charge of the object-relation mapping and dynamic data access and management; this ensures the fact that only the Application Server can access the Database.
+\item \textbf{DataHandler}: This module is in charge of the object-relation mapping and dynamic data access and management; this ensures the fact that only the Application Server can access the Database.
 
 \item \textbf{MapManager}: This module includes the logic needed to correctly visualize maps and markers moving on them, and also allows to choose and visualize stages. It must also serve as an interface with the external Maps Provider.
 
