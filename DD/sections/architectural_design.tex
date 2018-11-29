@@ -36,6 +36,15 @@ External systems are shown more in detail in the following figure: an high level
 
 \subsection{Component View}
 \subsubsection{Database}
+The Database layer interfaces itself only with the Application Server layer, in particular with the DataManager module. Besides the Database Engine, this layer is composed by a DBMS, which is in main part relational. The relational approach offers advantages ranging from the easy extensibility to independency from the physical organization, and in general the ACID properties of its transactions. For all these reasons fixed in front data and those that change less frequently are committed to the RDBMS, while for the others a NoSQL is provided. In fact thanks to its well-known scalability it fits better for data accumulated in large numbers every second, which is the case of all the data collected by the application through the wearable device.
+
+The Database layer has to store all the data shown in the following ER diagram, the sensible of which must be encrypted before being stored.
+
+\begin{center}
+\includegraphics[scale=0.35]{sections/diagrams/ER.png}
+\newline
+\captionof{figure}{ER model of the system}
+\end{center}
 
 \subsubsection{Application Server}
 This layer must handle the business logic as a whole, the connections with the Database Layer and the multiple ways of accessing the application from different clients and external systems. The main feature of the Application Server are the specific modules of business logic, which describe business rules and work-flows for each of the functionalities provided by the application itself. \newline
