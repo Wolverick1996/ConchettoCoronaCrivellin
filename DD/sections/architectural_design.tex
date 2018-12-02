@@ -57,7 +57,7 @@ External systems are shown more in detail in the following figure: an high-level
 \subsubsection{Database}
 The Database layer must only be accessible through the Application Server via a dedicated interface. With respect to this, the Application Server must provide a persistence unit to handle the dynamic behaviour of all of the persistent application data. \newline
 
-Besides the Database Engine, this layer is composed by a DBMS, which is in main part relational. The relational approach offers advantages ranging from the easy extensibility to independency from the physical organization, and in general the ACID properties of its transactions. For all these reasons fixed in front data and those that change less frequently are committed to the RDBMS, while for the others a NoSQL is provided. In fact thanks to its well-known scalability it fits better for data accumulated in large numbers every second, which is the case of all the data collected by the application through the wearable device. \newline
+Besides the Database Engines, this layer is composed by a DBMS, which is in main part relational. The relational approach offers advantages ranging from the easy extensibility to independency from the physical organization, and in general the ACID properties of its transactions. For all these reasons fixed in front data and those that change less frequently are committed to the RDBMS, while for the others a NoSQL is provided. In fact thanks to its well-known scalability it fits better for data accumulated in large numbers every second, which is the case of all the data collected by the application through the wearable device. \newline
 
 The Database layer has to store all the data shown in the following ER diagram, the sensible of which must be encrypted before being stored.
 
@@ -114,6 +114,16 @@ The Desktop Client directly communicates with the business logic of the Applicat
 \includegraphics[scale=0.43]{sections/diagrams/globalCV.png}
 \newline
 \captionof{figure}{Global component view of the system}
+\end{center}
+
+\subsection{Runtime View}
+
+\begin{center}
+\includegraphics[scale=0.4]{sections/diagrams/AutomatedSOS}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.35]{sections/diagrams/run_organization}
 \end{center}
 
 %\end{document}
