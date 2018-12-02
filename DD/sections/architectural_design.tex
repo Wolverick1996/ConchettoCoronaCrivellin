@@ -4,9 +4,26 @@
 %\begin{document}
 
 \subsection{Overview}
+This section provides a detailed view over the system architecture and its components, describing them at both logical and physical level. \newline
 
-\subsection{High Level Components}
-The main high level components of the system are:
+\textbf{Section 2.2 - High-level components}: This subsection provides a description of high-level components and their interactions. \newline
+
+\textbf{Section 2.3 - Component view}: This subsection provides a detailed insight of the components described in the previous section. \newline
+
+\textbf{Section 2.4 - Deployment view}: This subsection provides a set of indications on how to deploy the illustrated components on physical tiers. \newline
+
+\textbf{Section 2.5 - Runtime view}: In this subsection sequence diagrams are used to describe the way components interact to accomplish specific tasks typically related to your use cases. \newline
+
+\textbf{Section 2.6 - Component interfaces}: This subsection provides a description of the different type of interfaces among the various described components. \newline
+
+\textbf{Section 2.7 - Selected architectural styles and patterns}: This subsection provides a list of the architectural styles, design patterns and paradigms adopted in the design phase. \newline
+
+\textbf{Section 2.8 - Other design decisions}: This subsection lists of all other relevant design decisions that were not mentioned before.
+
+\clearpage
+
+\subsection{High-level components}
+The main high-level components of the system are:
 
 \begin{itemize}
 \item \textbf{Database}: The system data layer; it includes all structures and entities responsible for data storage and management. No application logic is found at this level, apart from the DBMS one that must guarantee the correct functioning of the data structures while assuring the ACID properties of transactional databases.
@@ -23,20 +40,20 @@ The main high level components of the system are:
 The described components are structured in three layers, as shown in the following figure. It also includes the interaction with external systems, that is intended to happen at the level of the Application Server.
 
 \begin{center}
-\includegraphics[scale=0.75]{sections/diagrams/layers.png}
+\includegraphics[scale=0.69]{sections/diagrams/layers.png}
 \newline
 \captionof{figure}{Logical layers of the system}
 \end{center}
 
-External systems are shown more in detail in the following figure: an high level overview of the system components.
+External systems are shown more in detail in the following figure: an high-level overview of the system components.
 
 \begin{center}
 \includegraphics[scale=0.6]{sections/diagrams/highlevel.png}
 \newline
-\captionof{figure}{High level components of the system}
+\captionof{figure}{High-level components of the system}
 \end{center}
 
-\subsection{Component View}
+\subsection{Component view}
 \subsubsection{Database}
 The Database layer must only be accessible through the Application Server via a dedicated interface. With respect to this, the Application Server must provide a persistence unit to handle the dynamic behaviour of all of the persistent application data. \newline
 
@@ -45,7 +62,7 @@ Besides the Database Engine, this layer is composed by a DBMS, which is in main 
 The Database layer has to store all the data shown in the following ER diagram, the sensible of which must be encrypted before being stored.
 
 \begin{center}
-\includegraphics[scale=0.35]{sections/diagrams/ER.png}
+\includegraphics[scale=0.34]{sections/diagrams/ER.png}
 \newline
 \captionof{figure}{ER model of the system}
 \end{center}
@@ -61,7 +78,7 @@ The main business logic modules must include:
 \begin{itemize}
 \item \textbf{UserManager}: This module manages all the logic involved with user account management, login, registration and profile customization, as well as the generation and provision of user credentials.
 
-\item \textbf{DataHandler}: This module manages the logic needed to manage data requests from third parties.
+\item \textbf{DataHandler}: This module manages the logic needed to manage data requests from third parties. It also includes the logic needed to communicate with external wearable devices and get data from them. It must also serve as an interface with the external Wearable Handler (e.g. Health app for iOS, Google Fit for Android, other available apps from various manufacturers).
 
 \item \textbf{MapManager}: This module includes the logic needed to correctly visualize maps and markers moving on them, and also allows to choose and visualize stages. It must also serve as an interface with the external Maps Provider.
 
@@ -72,9 +89,26 @@ The main business logic modules must include:
 \item \textbf{NotificationManager}: This module serves as a gateway from the UserManager module, which needs to send an email to the clients, by managing the logic behind the email notification services. It also manages the logic needed to send and receive push notifications serving as an interface with the external Push Notifications Gateway.
 
 \item \textbf{RunManager}: This module allows users to observe, participate, create and manage running races. It also has to provide and show info about races and it gets data from the MapManager, used to update leaderboards.
-
-\item \textbf{WearableManager}: This module includes the logic needed to communicate with external wearable devices and get data from them. It must also serve as an interface with the external Wearable Handler (e.g. Health app for iOS, Google Fit for Android).
 \end{itemize}
+
+\subsubsection{Mobile Application Client}
+As stated in the RASD document, the Mobile Application Client represents the main interface for customers and it should be implemented for both Android and iOS.
+
+The mobile application must be designed in a way that makes communications with the Application Server easy and independent from the implementation of both sides. In order to do so, adequate APIs must be defined and used similarly to what has been described for the interactions between the two server layers.
+
+The mobile application UI must be designed following the guidelines provided by the Android and iOS producers.
+
+The mobile application directly communicates with the business logic using its RESTful API interfaces.
+
+\subsubsection{Wearable Application Client}
+As stated in the RASD document, the Wearable Application Client should be implemented for both WearOS and watchOS.
+
+The software module to be included in the application must manage the GPS locations of the device and the connection with the device sensors, as well as the transmission of all health data to the mobile application via bluetooth.
+
+\subsubsection{Desktop Client}
+As mentioned before, currently TrackMe doesn't offer a desktop or web version of its application. However, companies can get data through scripts and HTTPS requests using provided libraries to include in order to allow the communication (authentication always required).
+
+The Desktop Client directly communicates with the business logic of the Application Server.
 
 \begin{center}
 \includegraphics[scale=0.43]{sections/diagrams/globalCV.png}

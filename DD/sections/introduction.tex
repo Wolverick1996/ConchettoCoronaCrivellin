@@ -1,0 +1,62 @@
+%\documentclass[11pt]{article}
+%\usepackage{fullpage}
+%\usepackage{graphicx}
+
+%\begin{document}
+
+\subsection{Purpose}
+This document is intended to provide a deeper functional description of the TrackMe system-to-be by giving technical details and describing the main architectural components as well as their interfaces and their interactions. The relations among the different modules are pointed out using UML standards and other useful diagrams showing the structure of the system.\newline
+
+The document aims to guide the software development team to implement the architecture of the project, by providing a stable reference and a single vision of all parts of the software itself and clearly defining how they work. It also presents in more details the implementation and integration plan, as well as the testing plan.
+
+\subsection{Scope}
+The system aims to support TrackMe services: Data4Help, AutomatedSOS and Track4Run.
+
+The system is structured in a three-layered model, which will be thoroughly described in this document, that adapts to several forms of clients: various types of actors that interact with the system-to-be by generating a client-server dualism, hence a flow of requests-responses.
+
+The architecture must be designed with the intent of being maintainable and extensible, also foreseeing future changes. This document aims to drive the implementation and testing phase so that cohesion and decoupling are increased as much as possible. In order to do so, individual components must not include too many unrelated functionalities and reduce interdependency between one another.
+
+Specific architectural styles and design patterns will be followed in this document and used for future implementation, as well as common design paradigms that combine useful features of said concepts.
+
+\subsection{Definitions, Acronyms, Abbreviations}
+\subsubsection{Definitions}
+\begin{itemize}
+\item \textbf{Relational data}: data structured according to the relational model.
+\item \textbf{NoSQL data}: data not structured according to the relational model.
+\end{itemize}
+\subsubsection{Acronyms}
+\begin{itemize}
+\item RASD – Requirement Analysis and Specification Document
+\item DD - Design Document
+\item REST - REpresentational State Transfer
+\item HTTPS - HyperText Transfer Protocol over Secure Socket Layer
+\item API - Application Programming Interface
+\item GPS - Global Positioning System
+\item DBMS - DataBase Management Server
+\item RDBMS - Relational DataBase Management Server
+\item ACID - Atomicity, Consistency, Isolation and Durability
+\end{itemize}
+\subsubsection{Abbreviations}
+\begin{itemize}
+\item \verb|[|Gn\verb|]|: n-th goal
+\item \verb|[|Rn\verb|]|: n-th functional requirement
+\end{itemize}
+
+\subsection{Document Structure}
+The document is composed of 7 sections.\newline
+
+\textbf{Section 1 - Introduction}: This section gives an introduction of the Design Document. It contains the purpose and the scope of the document, as well as some abbreviation in order to provide a better understanding of the document to the reader.\newline
+
+\textbf{Section 2 - Architectural design}: This section shows the main system components together with sub-components and their relationship. This section is divided into different parts whose focus is mainly on design choices, interactions, architectural styles and patterns.\newline
+
+\textbf{Section 3 - User Interface}: This section is strongly dependant from the section 3 of the RASD, in which mockups are already shown.\newline
+
+\textbf{Section 4 - Requirements traceability}: This section shows how all the functional requirements previously defined in the RASD document are satisfied by architectural choices.\newline
+
+\textbf{Section 5 - Implementation, integration and test plan}: This section identifies the order in which it is planned to implement the subcomponents of the system and the order in which it is planned to integrate such subcomponents and test the integration.\newline
+
+\textbf{Section 6 - Effort spent}: This section shows the effort spent by each group member while working on this document.\newline
+
+\textbf{Section 7 - References}: This section includes the reference documents.
+
+%\end{document}
