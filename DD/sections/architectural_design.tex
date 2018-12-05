@@ -116,7 +116,23 @@ The Desktop Client directly communicates with the business logic of the Applicat
 \captionof{figure}{Global component view of the system}
 \end{center}
 
-\subsection{Runtime View}
+\subsection{Deployment view}
+The physical deployment of the system is done on 3 layers:
+\begin{itemize}
+\item Clients are deployed on different devices: the Desktop Device is related exclusively to third parties, the Mobile Device can be used by both third parties and generic users, the Wearable Device is related exclusively to generic users.
+
+\item  The main logic of the application will be deployed in the Application Server. This server will communicate with all the other nodes - it will gather information from the external services (not here represented), manage user accounts and saved data from the Database and take requests and send back responses to the users.
+
+\item The relational and the NoSQL databases can be deployed on the same physical machine. However, since they are completely independent one from the other, they could be moved on different machines as soon as it will be required for some reason.
+\end{itemize}
+
+\begin{center}
+\includegraphics[scale=0.5]{sections/diagrams/deployment.png}
+\newline
+\captionof{figure}{Deployment diagram of the system}
+\end{center}
+
+\subsection{Runtime view}
 
 \begin{center}
 \includegraphics[scale=0.4]{sections/diagrams/data_transfer}
