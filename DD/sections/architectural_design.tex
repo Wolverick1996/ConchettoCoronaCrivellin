@@ -136,26 +136,35 @@ The physical deployment of the system is done on 3 layers:
 
 \begin{center}
 \includegraphics[scale=0.4]{sections/diagrams/data_transfer}
+\newline
 \captionof{figure}{Sequence diagram of a data request from a third party}
 \end{center}
 
 \begin{center}
 \includegraphics[scale=0.4]{sections/diagrams/AutomatedSOS}
+\newline
 \captionof{figure}{Sequence diagram of an emergency situation}
 \end{center}
 
 \begin{center}
 \includegraphics[scale=0.35]{sections/diagrams/run_organization}
+\newline
 \captionof{figure}{Sequence diagram of a run creation and organization}
 \end{center}
 
 \begin{center}
 \includegraphics[scale=0.4]{sections/diagrams/run_enrollment}
+\newline
 \captionof{figure}{Sequence diagram of a run enrollment from a generic user}
 \end{center}
 
 \begin{center}
 \includegraphics[scale=0.4]{sections/diagrams/run_development}
+\newline
 \captionof{figure}{Sequence diagram of a run development from its start to its end}
 \end{center}
+
+\subsection{Other design decisions}
+\subsubsection{Passwords storage}
+For security reasons, the user’s password is stored using cryptographic hash functions. In addition to that, the password is not only hashed, but also salted. This is a common security choice since many users reuse passwords for multiple sites and a cyber-attack could jeopardize their sensitive information.
 %\end{document}
