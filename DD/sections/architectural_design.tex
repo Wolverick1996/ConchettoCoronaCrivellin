@@ -62,7 +62,7 @@ Besides the Database Engines, this layer is composed by a DBMS, which is in main
 The Database layer has to store all the data shown in the following E-R diagram, the sensible of which must be encrypted before being stored.
 
 \begin{center}
-\includegraphics[scale=0.34]{sections/diagrams/ER.png}
+\includegraphics[scale=0.33]{sections/diagrams/ER.png}
 \newline
 \captionof{figure}{E-R model of the system}
 \end{center}
@@ -177,6 +177,9 @@ The physical deployment of the system is done on 3 layers:
 \end{center}
 
 \subsection{Runtime view}
+In this section, a detail of the interactions between modules is shown. In particular, it is presented how the server modules, the clients and the database system interact at runtime in the most important scenarios as regarding main functionalities of the system.
+
+The communication between the Application Server and the databases is abstracted by the Persistence Unit, so its data are represented with entity classes; the client is considered as a whole without dividing it into subcomponents.
 
 \begin{center}
 \includegraphics[scale=0.4]{sections/diagrams/data_transfer}
@@ -189,6 +192,8 @@ The physical deployment of the system is done on 3 layers:
 \newline
 \captionof{figure}{Sequence diagram of an emergency situation}
 \end{center}
+
+For sake of legibility in the previous sequence diagram only the case in which the third party doesn't have a survey with the searched user in it is shown. If the third party has already got it, the request for consent isn't forwarded, and the DataHandler gives directly the data requested with the possibility to subscribe to it. This fuctionality is given through the methods \texttt{sendDataAskSubscription(healthData, position, subscriptonResult)} and \texttt{subscribeSetF\-requency(frequency)}, already shown in the diagram.
 
 \begin{center}
 \includegraphics[scale=0.35]{sections/diagrams/run_organization}
@@ -208,7 +213,95 @@ The physical deployment of the system is done on 3 layers:
 \captionof{figure}{Sequence diagram of a run development from its start to its end}
 \end{center}
 
-\clearpage
+\subsection{Component Interfaces}
+This section deals with the comunication between components and subcomponents in terms of interfaces. In fact, the Application Server's interfaces will be described in detail in order to specify exactly how they can be used from the other components and server's subcomponents.
+
+\subsubsection{Client}
+The communication between client (mobile application or script) and the Applicatin Server is committed to RESTful APIs, that transmit data on HTTPS protocol without further levels. The communication itself is an exchange of HTTP instructions, URLs and JSON objects.
+
+\subsubsection{DBMSs}
+
+\subsubsection{External Systems}
+As regards the mapping service, the Application Service must interface with Google Maps JavaScript API in order to display tracks and runners in real time and in a personalized way, SDK Maps for Android and SDK Maps for iOS allow an easy way to configure and deploy location services on smartphone.
+
+Payments are committed to a Payment Handler who will provide the appropriate APIs to manage payments of any kind. In particular, the system must support the main payment methods: PayPal and the main credit cards.
+
+As already set in the RASD document, for notifications and messages the Application Server uses the Push Notifications Gateway of own APIs (Push API, to send notifications when the application is closed) and a standard SMS \& Voice Gateway. 
+An example could be Nexmo, with its SMS \& Voice API RESTful service.
+
+Finally, applications that communicate with smart bands and wearable devices other than WearOS and watchOS are considered external systems. Therefore, they will provide their own APIs for communication with the Application Server.
+
+\subsubsection{Interfaces of Application Server subcomponents}
+\paragraph{DataHandler}
+
+\begin{itemize}
+\item[ ]\texttt{requestDataSingleUser(fiscal code)}: method used to forward the request of data of a specific individual; it returns the reply (consent or deny).
+
+\item[ ]\texttt{requestDataThroughFilters(location, address, age, gender, timeSlot)}: method used to send, in order to submit the check, the request of data of an anonymized group of persons; it returns the check result (success/deny for privacy reasons).
+
+\item[ ]\texttt{checkCardinality(specifiedUsersList)}: method used to check if the considered group should be considered anonymized; it returns a boolean result.
+
+\item[ ]\texttt{notifyData(user, healthData, position)}: method used to send data to the DataHandler module, that will store them in the NoSQL database: as already stated, only the Application Server can access the databases; it returns nothing.
+\end{itemize}
+
+\paragraph{EmergencyManager}
+
+\begin{itemize}
+\item[ ]\texttt{notifyData(user, healthData, position)}: this method is the same above, it corresponds to the observer pattern's "update", but here it's used to send data in order to check if the user is in danger; it returns nothing.
+
+\item[ ]\texttt{checkThresholds(healthData)}: method used to check if each type of health data stays between certain thresholds (which can be taken from health data themselves).
+
+\item[ ]\texttt{activateEmergencyService}:
+\end{itemize}
+
+\paragraph{MapManager}
+
+\begin{itemize}
+\item[ ]\texttt{mapServiceRequest(locationName)}: method used to forward a request for a map; it returns the requested map.
+
+\item[ ]\texttt{acceptableStagesChosen(positionsSet)}: method used to forward a request for the shortest path between the stages selected; it returns the path.
+
+\item[ ]\texttt{setRunnerVisible(), setLeaderBoardVisible(), setNotVisible(), setOnlyLeaderboardVisible()}: these four methods are used to set what is visible on the screen of a run display; it returns nothing.
+
+\item[ ]\texttt{updateLeaderboard(distancesSet)}: method used to recalculate the leaderboard according to the new runners' distances from the end on the path; it returns the new leaderboard.
+\end{itemize}
+ 
+\paragraph{NotificationManager}
+
+\begin{itemize}
+\item[ ]\texttt{askUserConsent(user, thirdParty)}: method used to send a notification through which is asked consent for a survey; it returns the user's reply (positive ore negative).
+
+\item[ ]\texttt{signalError(user, type} method called when a component wants to send an error notification to the user, specifying the type of error; it returns nothing.
+
+\item[ ]\texttt{runOrganizers(organizerList, run)}: method used when in the creation of a run more than one organizer are set and they need to be informed; it returns nothing.
+
+\item[ ]\texttt{notifyGuests(runnersList, run)}: method used in order to command to send a notification to all the users invited to a private run; it returns nothing.
+
+\item[ ]\texttt{runNotification(user, type)}: method used to create a notification for a runner, which message depends on the type of run notification; it returns nothing.
+
+\item[ ]\texttt{sendErrorEmail(user, paymentCode)}: method used to make NotificationManager send an e-mail to warn the user his/her payment wasn't successful; it returns nothing.
+\end{itemize}
+
+\paragraph{PaymentGateway}
+
+\begin{itemize}
+\item[ ]\texttt{newPayment(userCredentials, paymentMethod)}: method used to forward a payment request; it returns the payment result (successful or unsuccessful).
+\end{itemize}
+
+\paragraph{RunManager}
+
+\begin{itemize}
+\item[ ]\texttt{stagesChosen(stagesSet)}: method used to send the track stages to submit to check; it returns nothing.
+
+\item[ ]\texttt{checkNumberStages(stagesSet)}: method used to check if the number of stages exceeds 10; it returns the check result (positive or negative).
+
+\item[ ]\textbf{formFilled(form)}: method used to send the run form filled out; it returns nothing.
+
+\item[ ]\textbf{checkValidity(form)}: method used to check if the form is filled correctly and it's therefore possible to create the run; it returns the check result (positive or negative).
+\end{itemize}
+
+\paragraph{UserManager}
+
 
 \subsection{Selected Architectural Styles and Patterns}
 \subsubsection{Architectural Styles}
