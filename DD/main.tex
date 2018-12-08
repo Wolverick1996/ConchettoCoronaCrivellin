@@ -6,6 +6,15 @@
 \usepackage[font=small, labelfont=bf, skip=1pt]{caption}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{listings}
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+\titleformat{\paragraph}
+   {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+ 
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
 \begin{document}
 
@@ -57,7 +66,7 @@
 
 \clearpage
 \section{Implementation, integration and test plan}
-%\input{sections/implementation.tex}
+\input{sections/implementation.tex}
 
 \clearpage
 \section{Effort spent}

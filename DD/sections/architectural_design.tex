@@ -62,7 +62,7 @@ Besides the Database Engines, this layer is composed by a DBMS, which is in main
 The Database layer has to store all the data shown in the following E-R diagram, the sensible of which must be encrypted before being stored.
 
 \begin{center}
-\includegraphics[scale=0.34]{sections/diagrams/ER.png}
+\includegraphics[scale=0.33]{sections/diagrams/ER.png}
 \newline
 \captionof{figure}{E-R model of the system}
 \end{center}
@@ -146,7 +146,7 @@ The specific implementation choices are:
 \begin{center}
 \includegraphics[scale=0.5]{sections/diagrams/component_view.png}
 \newline
-\captionof{figure}{The components of the Application Server	implemented as session beans to develop the business logic. An arrow going from component C1 to component C2 means that C1 uses interfacing methods provided	by C2.}
+\captionof{figure}{The components of the Application Server	implemented as session beans to develop the business logic. An arrow going from component C1 to component C2 means that C1 uses interfacing methods provided	by C2}
 \end{center}
 
 \paragraph{Mobile Application Client implementation}
@@ -176,11 +176,23 @@ The physical deployment of the system is done on 3 layers:
 \captionof{figure}{Deployment diagram of the system}
 \end{center}
 
+\clearpage
+
 \subsection{Runtime view}
 
 In this section, a detail of the interactions between modules is shown. In particular, it is presented how the server modules, the clients and the database system interact at runtime in the most important scenarios as regarding main functionalities of the system.
 
 The communication between the application server and the databases is abstracted by the persistence unit, so its data are represented with entity classes; the client is considered as a whole without dividing it into subcomponents.
+
+\begin{center}
+\includegraphics[scale=0.45]{sections/diagrams/registration}
+\captionof{figure}{Sequence diagram of the steps to register to the application}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.6]{sections/diagrams/login}
+\captionof{figure}{Sequence diagram of the application login}
+\end{center}
 
 \begin{center}
 \includegraphics[scale=0.4]{sections/diagrams/data_transfer}
@@ -252,8 +264,6 @@ Finally, applications that communicate with smart bands and wearable devices oth
 \item[ ]\texttt{checkThresholds(healthData)}: method used to check if each type of health data stays between certain thresholds (which can be taken from health data themselves).
 \end{itemize}
 
-activateEmergencyService:
-
 \paragraph{Map Manager}
 
 \begin{itemize}
@@ -269,17 +279,23 @@ activateEmergencyService:
 \paragraph{Notification Manager}
 
 \begin{itemize}
-\item[ ] \texttt{askUserConsent(user, thirdParty)}: method used to send a notification through which is asked consent for a survey; it returns the user's reply (positive ore negative).
+\item[ ]\texttt{askUserConsent(user, thirdParty)}: method used to send a notification through which is asked consent for a survey; it returns the user's reply (positive ore negative).
 
-\item[ ] \texttt{signalError(user, type} method called when a component wants to send an error notification to the user, specifying the type of error; it returns nothing.
+\item[ ]\texttt{signalError(user, type} method called when a component wants to send an error notification to the user, specifying the type of error; it returns nothing.
 
-\item[ ] \texttt{runOrganizers(organizerList, run)}: method used when in the creation of a run more than one organizer are set and they need to be informed; it returns nothing.
+\item[ ]\texttt{runOrganizers(organizerList, run)}: method used when in the creation of a run more than one organizer are set and they need to be informed; it returns nothing.
 
 \item[ ]\texttt{notifyGuests(runnersList, run)}: method used in order to command to send a notification to all the users invited to a private run; it returns nothing.
 
 \item[ ]\texttt{runNotification(user, type)}: method used to create a notification for a runner, which message depends on the type of run notification; it returns nothing.
 
+\item[ ]\texttt{paymentConfirmationEmail(user, paymentCode)}: method used to make the Notification Manager module send an e-mail of confirmation for the payment; it returns nothing.
+
 \item[ ]\texttt{sendErrorEmail(user, paymentCode)}: method used to make Notification Manager send an e-mail to warn the user his/her payment wasn't successful; it returns nothing.
+
+\item[ ]\texttt{registrationSuccEmail(user)}: method used to make Notification Manager send an e-mail to confirm the success of the registration operation; it returns nothing.
+
+\item[ ]\texttt{sendCodeEmail(user, code)}: method used to make Notification Manager send an e-mail with an identification code in order to create a new password; it returns nothing.
 \end{itemize}
 
 \paragraph{Payment Gateway}
@@ -295,14 +311,29 @@ activateEmergencyService:
 
 \item[ ]\texttt{checkNumberStages(stagesSet)}: method used to check if the number of stages exceeds 10; it returns the check result (positive or negative).
 
-\item[ ]\textbf{formFilled(form)}: method used to send the run form filled out; it returns nothing.
+\item[ ]\texttt{formFilled(form)}: method used to send the run form filled out; it returns nothing.
 
-\item[ ]\textbf{checkValidity(form)}: method used to check if the form is filled correctly and it's therefore possible to create the run; it returns the check result (positive or negative).
+\item[ ]\texttt{checkValidity(form)}: method used to check if the form is filled correctly and it's therefore possible to create the run; it returns the check result (positive or negative).
 \end{itemize}
 
 \paragraph{User Manager}
 
-\clearpage
+\begin{itemize}
+\item[ ]\texttt{requestRegistration(e-mail, username, password)}: method used to forward a request to register to the application, it returns the result (deny or success).
+
+\item[ ]\texttt{checkregistrationData(form)}: method used to check if the registration form is complete and its fields have been completed in an acceptable way; it returns the check result.
+
+\item[ ]\texttt{loginRequest(username, password)}: method used to require to be identified as a user already registered; it returns the result (deny or acceptance).
+
+\item[ ]\texttt{passwordRecovery(username)}: method used to ask for the possibility to use a new password; it returns nothing.
+
+\item[ ]\texttt{createNewCode()}: method that create a temporary identification code in order to make the user choose his/her new password; it returns the code.
+
+\item[ ]\texttt{insertCode(code)}: method called to send the code and to check if it matches the code generated previously by the User Manager module; it returns the check result (right or wrong).
+
+\item[ ]\texttt{newCredentials(username, newPassword)}: method used to send the new password chosen by the user; it returns nothing.
+
+\end{itemize}
 
 \subsection{Selected Architectural Styles and Patterns}
 \subsubsection{Architectural Styles}
