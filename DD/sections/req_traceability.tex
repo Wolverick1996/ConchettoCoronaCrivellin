@@ -1,0 +1,83 @@
+%\documentclass[11pt]{article}
+%\usepackage{fullpage}
+
+%\begin{document}
+The purpose of this section is show in which module  will be managed which functional requirement of the RASD document.
+
+\clearpage
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\begin{tabular}{|p{0.20\textwidth}|p{0.05\textwidth}|p{0.75\textwidth}|}
+\hline
+\textbf{DD Component} & \textbf{Goal} & \textbf{RASD Requirements}\\ \hline
+UserManager			& G1	& R1 - The usernames used in the system are unique to every user and third party	\\
+					& 		& R2 - Users and third parties can create an account by compiling a form	\\
+					&		& R2.1 - The form should contain the following: username, password, choice between personal and third party account, other anagraphical info (for the user) or company info (for the third party) \\
+					&		& R3 - Third parties must provide an identification alphanumerical code to confirm their identity	\\
+					&		& R4 - Users and third parties can log in to the application by providing the combination of a username and a password that match an account	\\
+					& G5	& R13 -	Users can manage the subscription to the AutomatedSOS service through a specific option in the settings menu\\
+					&		& R14 -	Old users (60+ years old) are automatically subscribed to the AutomatedSOS service since their registration\\
+					& G6	& R19 -	Users can manage their organized races in a management section in the app\\
+					&		& R19.1 - Organizers can postpone or delete a run. A notification is sent to participants and spectators\\\hline
+
+\end{tabular}
+\end{adjustbox}
+\end{table}
+			
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\begin{tabular}{|p{0.20\textwidth}|p{0.05\textwidth}|p{0.75\textwidth}|}
+\hline
+\textbf{DD Component} & \textbf{Goal} & \textbf{RASD Requirements}\\ \hline					
+DataHandler			& G2	& R5 - Third parties can search for specified data by filling the search bar with the fiscal code of a specific user	\\
+					&		& R6 -	A notify is sent to the selected user, who can accept or refuse the sharing of data with the specific company\\
+					&		& R7 - A message is sent to the third party, containing user's data if he/she allowed the sharing or a notification of refuse otherwise	\\
+					&		& R8 - Users under 18 years old can't be shown in the results of a search	\\
+					& G3	& R9 - Third parties can search for anonymized data of a specific group of users by selecting search filters (location, age, sex, time slot)	\\
+					&		& R10 - Anonymized data are shown just if the research produces at least 1000 results	\\
+					& G4	& R11 -	Third parties can flag an option to subscribe to new data of a specific user when they receive his/her data (the user already allowed the data sharing), or they can subscribe to get results of a research with specific filters as soon as they are produced\\
+					&		& R12 - Third parties can manage their subscriptions and set the frequency with which obtaining data for a specific subscription by selecting it and editing preferences	\\
+					& G9	& R28 - Users can visualize their own health status in the home page section of the app	\\ \hline
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\begin{tabular}{|p{0.20\textwidth}|p{0.05\textwidth}|p{0.75\textwidth}|}
+\hline
+\textbf{DD Component} & \textbf{Goal} & \textbf{RASD Requirements}\\ \hline
+
+EmergencyManager	& G5	& R15 -	The app calls autonomously the NUE (or 911) when such parameters fall below certain thresholds, and sends concurrently user's data (GPS location and health status parameters) via SMS\\ \hline
+RunManager			& G6	& R16 -	Users can create races by defining name, date, time, start point, stages and arrival point, and selecting the method of participation (open or by invitation) and the date and time of expiration for registrations. They can also add other organizers as collaboratos: selected users will receive a notify and they will see the race in their management section\\
+					&		& R16.1 - If a race by invitation is selected, a private link to a registration page is generated\\
+					&		& R16.2	- The organizer can specify a maximum of 10 stages\\
+					&		& R18 -	The system allows the organizers to sign an enrolled runner as "present" and to disqualify a runner by signing him/her as "disqualified"\\
+					&		& R20 -	Users can visualize nearby races or search for a specific run by searching for the name or location of the race\\
+					&		& R21 -	Runners can join a race through the race overview by clicking the "Participate" button. For races by invitation the button is visible just to invited users following the registration link\\
+					& G8	& R23 -	Users can become spectators of a race through the race overview by clicking the "Observe" button\\ \hline
+
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+\begin{table}[]
+\begin{adjustbox}{width=\textwidth}
+\begin{tabular}{|p{0.20\textwidth}|p{0.05\textwidth}|p{0.75\textwidth}|}
+\hline
+\textbf{DD Component} & \textbf{Goal} & \textbf{RASD Requirements}\\ \hline
+MapManager			& G6	& R16.3 - The distance between start and arrival points (stages included) cannot exceeds 50kms, otherwise a warning popup is shown and the organizer is invited to change at least one of them before continuing\\
+					&		& R17 - Organizers can choose one of the routes calculated by the system\\
+					& G8	& R24 -	For the duration of the race is always possible to see in the event page the map with markers, associated to runners' name through numbers, and a live leaderboard showing names, order numbers and possible disqualifications\\
+					&		& R25 -	A marker is on the track iff it corresponds to a user enrolled, signed as "present" at the run with his/her wearable device with Data4Help installed and not disqualified\\
+					&		& R26 -	The track represented is the one chosen by the organizer of the run\\ \hline
+NotificationManager	& G2	& R6 - A notify is sent to the selected user, who can accept or refuse the sharing of data with the specific company\\
+					&		& R7 - A message is sent to the third party, containing user's data if he/she allowed the sharing or a notification of refuse otherwise\\
+					& G6	& R19.1 - Organizers can postpone or delete a run. A notification is sent to participants and spectators\\ \hline
+PaymentGateway		& G7	& R21.1	- If it's specified that some payment is required, it will be committed to an external service\\ \hline
+
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+%\end{document}
