@@ -157,7 +157,7 @@ The core of both application must be a Controller that communicates user inputs 
 If the smartphone is paired with a device equipped with WearOS or watchOS with the TrackMe app installed, communications between the wearable and the mobile app are managed via bluetooth. The Wearable Application Client implementation is based on the mobile application one.
 
 \begin{center}
-\includegraphics[scale=0.45]{sections/diagrams/mobileApplClient.png}
+\includegraphics[scale=0.45]{sections/diagrams/mobileAppClient.png}
 \newline
 \captionof{figure}{Components of the mobile application}
 \end{center}
@@ -254,6 +254,7 @@ An example could be Nexmo, with its SMS \& Voice API RESTful service.
 Finally, applications that communicate with smart bands and wearable devices other than WearOS and watchOS are considered external systems. Therefore, they will provide their own APIs for communication with the Application Server.
 
 \subsubsection{Interfaces of Application Server subcomponents}
+
 \paragraph*{DataHandler}
 
 \begin{itemize}
