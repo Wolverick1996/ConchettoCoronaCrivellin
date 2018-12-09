@@ -116,7 +116,7 @@ The Desktop Client directly communicates with the business logic of the Applicat
 \captionof{figure}{Global component view of the system}
 \end{center}
 
-\subsubsection{Implementation Choices}
+\subsubsection{Implementation choices}
 \paragraph{Database implementation}
 The Database layer will be composed by two different databases: a relational database and a NoSQL database. The implementation choices for the relational one are the following:
 
@@ -176,10 +176,24 @@ The physical deployment of the system is done on 3 layers:
 \captionof{figure}{Deployment diagram of the system}
 \end{center}
 
+\clearpage
+
 \subsection{Runtime view}
 In this section, a detail of the interactions between modules is shown. In particular, it is presented how the server modules, the clients and the database system interact at runtime in the most important scenarios as regarding main functionalities of the system.
 
 The communication between the Application Server and the databases is abstracted by the Persistence Unit, so its data are represented with entity classes; the client is considered as a whole without dividing it into subcomponents.
+
+\begin{center}
+\includegraphics[scale=0.45]{sections/diagrams/registration}
+\newline
+\captionof{figure}{Sequence diagram of the steps to register to the application}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.55]{sections/diagrams/login}
+\newline
+\captionof{figure}{Sequence diagram of the application login}
+\end{center}
 
 \begin{center}
 \includegraphics[scale=0.4]{sections/diagrams/data_transfer}
@@ -193,7 +207,7 @@ The communication between the Application Server and the databases is abstracted
 \captionof{figure}{Sequence diagram of an emergency situation}
 \end{center}
 
-For sake of legibility in the previous sequence diagram only the case in which the third party doesn't have a survey with the searched user in it is shown. If the third party has already got it, the request for consent isn't forwarded, and the DataHandler gives directly the data requested with the possibility to subscribe to it. This fuctionality is given through the methods \texttt{sendDataAskSubscription(healthData, position, subscriptonResult)} and \texttt{subscribeSetF\-requency(frequency)}, already shown in the diagram.
+For sake of legibility in the previous sequence diagram only the case in which the third party doesn't have a survey with the searched user in it is shown. If the third party has already got it, the request for consent isn't forwarded, and the DataHandler gives directly the data requested with the possibility to subscribe to it. This fuctionality is given through the methods \texttt{sendDataAskSubscription(healthData, position, subscriptonResult)} and \texttt{subscribeSetF\-requency(frequency)}, already shown in the diagram. 
 
 \begin{center}
 \includegraphics[scale=0.35]{sections/diagrams/run_organization}
@@ -202,7 +216,7 @@ For sake of legibility in the previous sequence diagram only the case in which t
 \end{center}
 
 \begin{center}
-\includegraphics[scale=0.4]{sections/diagrams/run_enrollment}
+\includegraphics[scale=0.35]{sections/diagrams/run_enrollment}
 \newline
 \captionof{figure}{Sequence diagram of a run enrollment from a generic user}
 \end{center}
@@ -217,16 +231,18 @@ For sake of legibility in the previous sequence diagram only the case in which t
 This section deals with the comunication between components and subcomponents in terms of interfaces. In fact, the Application Server's interfaces will be described in detail in order to specify exactly how they can be used from the other components and server's subcomponents.
 
 \subsubsection{Client}
-The communication between client (mobile application or script) and the Applicatin Server is committed to RESTful APIs, that transmit data on HTTPS protocol without further levels. The communication itself is an exchange of HTTP instructions, URLs and JSON objects.
+
+The communication between Client (mobile application or script) and the Application Server is committed to RESTful APIs, that transmit data on HTTPS protocol without further levels. The communication itself is an exchange of HTTPS instructions, URLs and JSON objects.
 
 \subsubsection{DBMSs}
 
 \subsubsection{External Systems}
-As regards the mapping service, the Application Service must interface with Google Maps JavaScript API in order to display tracks and runners in real time and in a personalized way, SDK Maps for Android and SDK Maps for iOS allow an easy way to configure and deploy location services on smartphone.
+
+As regards the mapping service, the Application Server must interface with Google Maps JavaScript API in order to display tracks and runners in real time and in a personalized way, SDK Maps for Android and SDK Maps for iOS, allow an easy way to configure and deploy location services on smartphone.
 
 Payments are committed to a Payment Handler who will provide the appropriate APIs to manage payments of any kind. In particular, the system must support the main payment methods: PayPal and the main credit cards.
 
-As already set in the RASD document, for notifications and messages the Application Server uses the Push Notifications Gateway of own APIs (Push API, to send notifications when the application is closed) and a standard SMS \& Voice Gateway. 
+As already set in the RASD document, for notifications and messages the Application Server uses the Push Notifications Gateway of own APIs (Push API, to send notification when the application is closed) and a standard SMS \& Voice Gateway. 
 An example could be Nexmo, with its SMS \& Voice API RESTful service.
 
 Finally, applications that communicate with smart bands and wearable devices other than WearOS and watchOS are considered external systems. Therefore, they will provide their own APIs for communication with the Application Server.
@@ -237,11 +253,11 @@ Finally, applications that communicate with smart bands and wearable devices oth
 \begin{itemize}
 \item[ ]\texttt{requestDataSingleUser(fiscal code)}: method used to forward the request of data of a specific individual; it returns the reply (consent or deny).
 
-\item[ ]\texttt{requestDataThroughFilters(location, address, age, gender, timeSlot)}: method used to send, in order to submit the check, the request of data of an anonymized group of persons; it returns the check result (success/deny for privacy reasons).
+\item[ ]\texttt{requestDataThroughFilters(location, address, age, gender, timeSlot)}: method us\-ed to send, in order to submit to check, the request of data of an anonymized group of persons; it returns the check result (success/deny for privacy).
 
 \item[ ]\texttt{checkCardinality(specifiedUsersList)}: method used to check if the considered group should be considered anonymized; it returns a boolean result.
 
-\item[ ]\texttt{notifyData(user, healthData, position)}: method used to send data to the DataHandler module, that will store them in the NoSQL database: as already stated, only the Application Server can access the databases; it returns nothing.
+\item[ ]\texttt{notifyData(user, healthData, position)}: method used to send data to the Data Handler module, that will store them in the NoSQL database: as already stated, only the Application Server can access the databases; it returns nothing.
 \end{itemize}
 
 \paragraph{EmergencyManager}
@@ -250,8 +266,6 @@ Finally, applications that communicate with smart bands and wearable devices oth
 \item[ ]\texttt{notifyData(user, healthData, position)}: this method is the same above, it corresponds to the observer pattern's "update", but here it's used to send data in order to check if the user is in danger; it returns nothing.
 
 \item[ ]\texttt{checkThresholds(healthData)}: method used to check if each type of health data stays between certain thresholds (which can be taken from health data themselves).
-
-\item[ ]\texttt{activateEmergencyService}:
 \end{itemize}
 
 \paragraph{MapManager}
@@ -261,7 +275,7 @@ Finally, applications that communicate with smart bands and wearable devices oth
 
 \item[ ]\texttt{acceptableStagesChosen(positionsSet)}: method used to forward a request for the shortest path between the stages selected; it returns the path.
 
-\item[ ]\texttt{setRunnerVisible(), setLeaderBoardVisible(), setNotVisible(), setOnlyLeaderb\-oardVisible()}: these four methods are used to set what is visible on the screen of a run display; it returns nothing.
+\item[ ]\texttt{setRunnerVisible(), setLeaderBoardVisible(), setNotVisible(), setOnlyLeaderb\-oardVisible()}: these four methods are used to set what is visible on the screen of a run display; they return nothing.
 
 \item[ ]\texttt{updateLeaderboard(distancesSet)}: method used to recalculate the leaderboard according to the new runners' distances from the end on the path; it returns the new leaderboard.
 \end{itemize}
@@ -279,7 +293,13 @@ Finally, applications that communicate with smart bands and wearable devices oth
 
 \item[ ]\texttt{runNotification(user, type)}: method used to create a notification for a runner, which message depends on the type of run notification; it returns nothing.
 
+\item[ ]\texttt{paymentConfirmationEmail(user, paymentCode)}: method used to make the NotificationManager module send an e-mail of confirmation for the payment; it returns nothing.
+
 \item[ ]\texttt{sendErrorEmail(user, paymentCode)}: method used to make NotificationManager send an e-mail to warn the user his/her payment wasn't successful; it returns nothing.
+
+\item[ ]\texttt{registrationSuccEmail(user)}: method used to make NotificationManager send an e-mail to confirm the success of the registration operation; it returns nothing.
+
+\item[ ]\texttt{sendCodeEmail(user, code)}: method used to make NotificationManager send an e-mail with an identification code in order to create a new password; it returns nothing.
 \end{itemize}
 
 \paragraph{PaymentGateway}
@@ -302,8 +322,23 @@ Finally, applications that communicate with smart bands and wearable devices oth
 
 \paragraph{UserManager}
 
+\begin{itemize}
+\item[ ]\texttt{requestRegistration(e-mail, username, password)}: method used to forward a request to register to the application, it returns the result (deny or success).
 
-\subsection{Selected Architectural Styles and Patterns}
+\item[ ]\texttt{checkregistrationData(form)}: method used to check if the registration form is complete and its fields have been completed in an acceptable way; it returns the check result.
+
+\item[ ]\texttt{loginRequest(username, password)}: method used to require to be identified as a user already registered; it returns the result (deny or acceptance).
+
+\item[ ]\texttt{passwordRecovery(username)}: method used to ask for the possibility to use a new password; it returns nothing.
+
+\item[ ]\texttt{createNewCode()}: method that create a temporary identification code in order to make the user choose his/her new password; it returns the code.
+
+\item[ ]\texttt{insertCode(code)}: method called to send the code and to check if it matches the code generated previously by the UserManager module; it returns the check result (right or wrong).
+
+\item[ ]\texttt{newCredentials(username, newPassword)}: method used to send the new password chosen by the user; it returns nothing.
+\end{itemize}
+
+\subsection{Selected architectural styles and patterns}
 \subsubsection{Architectural Styles}
 \paragraph{Client and Server}
 The main architectural style adopted for TrackMe system is the Client-Server one, the most well known and used architectural style for distributed applications. It will be adopted in the 3-tier variant, with the Presentation layer on the client (the mobile app), the Application layer on the Application Server and the Data layer on the Database Server.
