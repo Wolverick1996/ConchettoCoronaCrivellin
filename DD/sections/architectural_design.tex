@@ -76,7 +76,7 @@ The Application Server must provide a means to interface with the mobile clients
 
 The main business logic modules must include:
 \begin{itemize}
-\item \textbf{UserManager}: This module manages all the logic involved with user account management, login, registration and profile customization, as well as the generation and provision of user credentials.
+\item \textbf{UserManager}: This module manages all the logic involved with user account management, login, registration and profile customization, as well as the generation and provision of user credentials. It also allows to visualize correctly the YOUR RACES screen.
 
 \item \textbf{DataHandler}: This module manages the logic needed to manage data requests from third parties. It also includes the logic needed to communicate with external wearable devices and get data from them. It must also serve as an interface with the external Wearable Handler (e.g. Health app for iOS, Google Fit for Android, other available apps from various manufacturers).
 
@@ -213,7 +213,7 @@ For sake of legibility in the previous sequence diagram only the case in which t
 \captionof{figure}{Sequence diagram of a run development from its start to its end}
 \end{center}
 
-\subsection{Component Interfaces}
+\subsection{Component interfaces}
 This section deals with the comunication between components and subcomponents in terms of interfaces. In fact, the Application Server's interfaces will be described in detail in order to specify exactly how they can be used from the other components and server's subcomponents.
 
 \subsubsection{Client}
@@ -261,7 +261,7 @@ Finally, applications that communicate with smart bands and wearable devices oth
 
 \item[ ]\texttt{acceptableStagesChosen(positionsSet)}: method used to forward a request for the shortest path between the stages selected; it returns the path.
 
-\item[ ]\texttt{setRunnerVisible(), setLeaderBoardVisible(), setNotVisible(), setOnlyLeaderboardVisible()}: these four methods are used to set what is visible on the screen of a run display; it returns nothing.
+\item[ ]\texttt{setRunnerVisible(), setLeaderBoardVisible(), setNotVisible(), setOnlyLeaderb\-oardVisible()}: these four methods are used to set what is visible on the screen of a run display; it returns nothing.
 
 \item[ ]\texttt{updateLeaderboard(distancesSet)}: method used to recalculate the leaderboard according to the new runners' distances from the end on the path; it returns the new leaderboard.
 \end{itemize}
@@ -295,9 +295,9 @@ Finally, applications that communicate with smart bands and wearable devices oth
 
 \item[ ]\texttt{checkNumberStages(stagesSet)}: method used to check if the number of stages exceeds 10; it returns the check result (positive or negative).
 
-\item[ ]\textbf{formFilled(form)}: method used to send the run form filled out; it returns nothing.
+\item[ ]\texttt{formFilled(form)}: method used to send the run form filled out; it returns nothing.
 
-\item[ ]\textbf{checkValidity(form)}: method used to check if the form is filled correctly and it's therefore possible to create the run; it returns the check result (positive or negative).
+\item[ ]\texttt{checkValidity(form)}: method used to check if the form is filled correctly and it's therefore possible to create the run; it returns the check result (positive or negative).
 \end{itemize}
 
 \paragraph{UserManager}

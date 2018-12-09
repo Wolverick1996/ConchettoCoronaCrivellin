@@ -41,6 +41,21 @@ Finally, the fourth group is composed by:
 
 \subsection{Integration and Testing}
 \subsubsection{Entry criteria}
+The integration of components and its testing should start as soon as possible, but it's necessary to specify some conditions before. First of all, the external services and their APIs that are going
+to be used in the application should be available and ready. This applies to our external and already mentioned services: Payment Gateway, Maps Provider, SMS \& Voice Gateway, Wearable Handler, Push Notifications Gateway and to DBMSs and the server on which them will be running on. \newline
+
+Next, the modules which are being integrated should have at least the operations concerning one another created, if not completed completely. The operations that have been developed should pass the unit tests in order to be sure that the components are working fine on their own and that if an integration test fails, the problem lies in the in the integration itself. \newline
+
+Considering also the methods already specified, and the relevance of modules in the general context of the application, in order to have integration tests that have some meaning an estimate of the completion of components before the start of testing could be the following:
+\begin{itemize}
+\item UserManager -- 20-30\% (CRUD operations don't need to be tested so much)
+\item DataHandler -- 90-100\% (it's the core of the entire application because of the managing of exchanges of data)
+\item MapManager -- 50\%
+\item PaymentGateway -- 20-30\% (not crucial in the development of the application)
+\item EmergencyManager -- 70-80\% (it's important to test the speed of response in detecting thresholds and communicating outside)
+\item NotificationManager -- 70-80\%
+\item RunManager -- 60-70\% (interacts with many other modules)
+\end{itemize}
 
 \subsubsection{Elements to be integrated}
 The TrackMe system is composed of a number of components, as already shown, and the integration process can be grouped in the following way:
