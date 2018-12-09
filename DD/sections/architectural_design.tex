@@ -154,8 +154,10 @@ The mobile application UI must be designed following the design guidelines provi
 
 The core of both application must be a Controller that communicates user inputs (after translating them from the UI input) to the Application Server via RESTful APIs. The access to the GPS of the devices and HealthData of users (only for devices that can collect these kind of data) must be performed through the default frameworks of the respective systems.
 
+If the smartphone is paired with a device equipped with WearOS or watchOS with the TrackMe app installed, communications between the wearable and the mobile app are managed via bluetooth. The Wearable Application Client implementation is based on the mobile application one.
+
 \begin{center}
-\includegraphics[scale=0.45]{sections/diagrams/mac.png}
+\includegraphics[scale=0.45]{sections/diagrams/mobileApplClient.png}
 \newline
 \captionof{figure}{Components of the mobile application}
 \end{center}
