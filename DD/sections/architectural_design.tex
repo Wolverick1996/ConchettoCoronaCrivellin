@@ -201,13 +201,13 @@ The communication between the Application Server and the databases is abstracted
 \captionof{figure}{Sequence diagram of a data request from a third party}
 \end{center}
 
+For sake of legibility in the previous sequence diagram only the case in which the third party doesn't have a survey with the searched user in it is shown. If the third party has already got it, the request for consent isn't forwarded, and the DataHandler gives directly the data requested with the possibility to subscribe to it. This fuctionality is given through the methods \texttt{askDataSendSubscription(subscription)} and \texttt{setFrequencySubscription(frequency)}, already shown in the diagram.
+
 \begin{center}
 \includegraphics[scale=0.4]{sections/diagrams/AutomatedSOS}
 \newline
 \captionof{figure}{Sequence diagram of an emergency situation}
-\end{center}
-
-For sake of legibility in the previous sequence diagram only the case in which the third party doesn't have a survey with the searched user in it is shown. If the third party has already got it, the request for consent isn't forwarded, and the DataHandler gives directly the data requested with the possibility to subscribe to it. This fuctionality is given through the methods \texttt{sendDataAskSubscription(healthData, position, subscriptonResult)} and \texttt{subscribeSetF\-requency(frequency)}, already shown in the diagram. 
+\end{center} 
 
 \begin{center}
 \includegraphics[scale=0.35]{sections/diagrams/run_organization}
@@ -236,6 +236,10 @@ The communication between Client (mobile application or script) and the Applicat
 
 \subsubsection{DBMSs}
 
+Since data are mapped into JPA entities, they will be stored persistently in the two databases. The relational one uses JPA over SQL to communicate with the database, while the non relational one uses Eclipse JNoSQL APIs.
+In order to reply to queries that require both the databeses content two or more distinct queries have to be merged on a more higher level. 
+
+
 \subsubsection{External Systems}
 
 As regards the mapping service, the Application Server must interface with Google Maps JavaScript API in order to display tracks and runners in real time and in a personalized way, SDK Maps for Android and SDK Maps for iOS, allow an easy way to configure and deploy location services on smartphone.
@@ -248,10 +252,14 @@ An example could be Nexmo, with its SMS \& Voice API RESTful service.
 Finally, applications that communicate with smart bands and wearable devices other than WearOS and watchOS are considered external systems. Therefore, they will provide their own APIs for communication with the Application Server.
 
 \subsubsection{Interfaces of Application Server subcomponents}
-\paragraph{DataHandler}
+\paragraph*{DataHandler}
 
 \begin{itemize}
 \item[ ]\texttt{requestDataSingleUser(fiscal code)}: method used to forward the request of data of a specific individual; it returns the reply (consent or deny).
+
+\item[ ]\texttt{askDataSendSubscription(subscription)}: method used to ask the data requested and assert if he/she wants to subscribe to those data at the same time; it returns the health data and the position.
+
+\item[ ]\texttt{setFrequencySubscription(frequency)}: method used to set the frequency on which the caller wants to receive the user's data; it returns nothing.
 
 \item[ ]\texttt{requestDataThroughFilters(location, address, age, gender, timeSlot)}: method us\-ed to send, in order to submit to check, the request of data of an anonymized group of persons; it returns the check result (success/deny for privacy).
 
@@ -260,7 +268,7 @@ Finally, applications that communicate with smart bands and wearable devices oth
 \item[ ]\texttt{notifyData(user, healthData, position)}: method used to send data to the Data Handler module, that will store them in the NoSQL database: as already stated, only the Application Server can access the databases; it returns nothing.
 \end{itemize}
 
-\paragraph{EmergencyManager}
+\paragraph*{EmergencyManager}
 
 \begin{itemize}
 \item[ ]\texttt{notifyData(user, healthData, position)}: this method is the same above, it corresponds to the observer pattern's "update", but here it's used to send data in order to check if the user is in danger; it returns nothing.
@@ -268,7 +276,7 @@ Finally, applications that communicate with smart bands and wearable devices oth
 \item[ ]\texttt{checkThresholds(healthData)}: method used to check if each type of health data stays between certain thresholds (which can be taken from health data themselves).
 \end{itemize}
 
-\paragraph{MapManager}
+\paragraph*{MapManager}
 
 \begin{itemize}
 \item[ ]\texttt{mapServiceRequest(locationName)}: method used to forward a request for a map; it returns the requested map.
@@ -280,7 +288,7 @@ Finally, applications that communicate with smart bands and wearable devices oth
 \item[ ]\texttt{updateLeaderboard(distancesSet)}: method used to recalculate the leaderboard according to the new runners' distances from the end on the path; it returns the new leaderboard.
 \end{itemize}
  
-\paragraph{NotificationManager}
+\paragraph*{NotificationManager}
 
 \begin{itemize}
 \item[ ]\texttt{askUserConsent(user, thirdParty)}: method used to send a notification through which is asked consent for a survey; it returns the user's reply (positive ore negative).
@@ -302,13 +310,13 @@ Finally, applications that communicate with smart bands and wearable devices oth
 \item[ ]\texttt{sendCodeEmail(user, code)}: method used to make NotificationManager send an e-mail with an identification code in order to create a new password; it returns nothing.
 \end{itemize}
 
-\paragraph{PaymentGateway}
+\paragraph*{PaymentGateway}
 
 \begin{itemize}
 \item[ ]\texttt{newPayment(userCredentials, paymentMethod)}: method used to forward a payment request; it returns the payment result (successful or unsuccessful).
 \end{itemize}
 
-\paragraph{RunManager}
+\paragraph*{RunManager}
 
 \begin{itemize}
 \item[ ]\texttt{stagesChosen(stagesSet)}: method used to send the track stages to submit to check; it returns nothing.
@@ -320,7 +328,7 @@ Finally, applications that communicate with smart bands and wearable devices oth
 \item[ ]\texttt{checkValidity(form)}: method used to check if the form is filled correctly and it's therefore possible to create the run; it returns the check result (positive or negative).
 \end{itemize}
 
-\paragraph{UserManager}
+\paragraph*{UserManager}
 
 \begin{itemize}
 \item[ ]\texttt{requestRegistration(e-mail, username, password)}: method used to forward a request to register to the application, it returns the result (deny or success).
@@ -340,12 +348,12 @@ Finally, applications that communicate with smart bands and wearable devices oth
 
 \subsection{Selected architectural styles and patterns}
 \subsubsection{Architectural Styles}
-\paragraph{Client and Server}
+\paragraph*{Client and Server}
 The main architectural style adopted for TrackMe system is the Client-Server one, the most well known and used architectural style for distributed applications. It will be adopted in the 3-tier variant, with the Presentation layer on the client (the mobile app), the Application layer on the Application Server and the Data layer on the Database Server.
 
 The main advantages of this choice are the clear decoupling between data and logic, the possibility to increase the portability reaching clients in the most easy way and the availability of a lot of COTS components to  develop the system in a very cost-effective way.
 
-\paragraph{Layers}
+\paragraph*{Layers}
 The system will also be divided into 3 Layers:
 \begin{itemize}
 \item Presentation Layer: accessible from users through their mobile application.
@@ -354,14 +362,14 @@ The system will also be divided into 3 Layers:
 \end{itemize}
 Software is divided in layers for decoupling and for better code maintainability. In this way different developers can focus on different tasks abstracting from other layers.
 
-\paragraph{Thin Client}
+\paragraph*{Thin Client}
 The thin client approach has been followed while designing the interaction among users’ machines and the system itself. All the main logic is implemented by the Application Server that has a sufficient computing power and can manage concurrency issues in an efficient way. On the other hand, the mobile application are in charge of presentation only and they do not involve decision logic.
 
 \subsubsection{Design Patterns}
-\paragraph{Model-View-Controller}
+\paragraph*{Model-View-Controller}
 The mobile (and wearable) application follow the MVC (Model-View-Controller) software design pattern, that better supports the Client-Server architecture, because it closely follows the division between data (Model), logic (Controller) and presentation (View) present also in our 3-tier architecture.
 
-\paragraph{Observer}
+\paragraph*{Observer}
 The observer or publish-subscribe pattern will also be used, allowing the various components of the system to register themselves and react to event raised by other components. This will be useful in implementing the EmergencyManager that always has to be notified in order to compare data and thresholds.
 
 \subsection{Other design decisions}
