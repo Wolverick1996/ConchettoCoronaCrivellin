@@ -65,10 +65,10 @@ Furthermore the app uses a city maps external service, suitable for embedding in
 The app uses the following communication interfaces:
 \begin{itemize}
 \item Internet connection for communication of data.
-\item RESTful APIs and JSON data format for communication over HTTP.
+\item RESTful APIs and JSON data format for communication over HTTPS.
 \item SDK Maps for Android, SDK Maps for iOS and API Maps JavaScript in order to allow an efficient Google Maps integration (these APIs allow to add an interactive and personalizable map in a mobile application, on Android and iOS).
 \item Interface with the push service(s) via own APIs in order to allow the app to send and receive push notifications to users' devices (both iOS and Android are supported).
-\item Interface with SMS and voice gateway provider via standard APIs in order to allow the app to send SMS and to make phone calls (useful for the AutomatedSOS service).
+\item Interface with SMS \& Voice gateway provider via standard APIs in order to allow the app to send SMS and to make phone calls (useful for the AutomatedSOS service).
 \item Wearable APIs in order to get data from smartphones, fitness trackers and other wearable devices.
 \end{itemize}
 
@@ -115,7 +115,7 @@ One day, during a walk, Lidia felt sick and collapsed on the ground. TrackMe det
 
 \hspace{-\parindent}\textbf{[G3] - Allow third parties to access to anonymized data of groups of individuals} \newline
 
-[R9] - Third parties can search for anonymized data of a specific group of users by selecting search filters (location, age, sex, time slot). \newline
+[R9] - Third parties can search for anonymized data of a specific group of users by selecting search filters (location, address, age, sex, time slot). \newline
 
 [R10] - Anonymized data are shown just if the research produces at least 1000 results. \newline
 
@@ -666,7 +666,7 @@ One day, during a walk, Lidia felt sick and collapsed on the ground. TrackMe det
 \begin{figure}[h!] \ContinuedFloat
 \centering
 \includegraphics[scale=0.57]{sections/diagrams/run_organization.png} \newline
-\captionof{figure}{Sequence diagram of a run rganization by Track4Run}
+\captionof{figure}{Sequence diagram of a run organization by Track4Run}
 \end{figure}
 
 \clearpage

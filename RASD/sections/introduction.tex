@@ -17,9 +17,9 @@ Finally, TrackMe offers an additional service to take advantage of the data coll
 
 \subsection{Scope}
 \subsubsection{Description of the given problem}
-As already explained above, TrackMe is a versatile app that once purchased provides three good services. Being an app for both companies that want to access user data, and for common users who want to monitor their data, there will be two slightly different interfaces. The generic user will be able to view his / her collected data, accept (or reject) requests to use his / her data by third parties and access the Track4Run section where he / she can create, participate or simply follow sports events. On the other hand, a user with access to a company account will have much more limited functions since the home page will be able to access lists of users who are registered for data collection, or a search section from which they will be able to search for new users or anonymous groups to sign up for. When a company account wishes to subscribe to the data of a specific user, a notification will be sent to the user in question, this will accept or reject the request, then the company can cancel the registration as the user who provides the data will prevent access to your data.
+As already explained above, TrackMe is a versatile app that once purchased provides three good services. Being an app for both companies that want to access user data, and for common users who want to monitor their data, there will be two slightly different interfaces. The generic user will be able to view his/her collected data, accept (or reject) requests to use his/her data by third parties and access the Track4Run section where he/she can create, participate or simply follow sports events. On the other hand, a user with access to a company account will have much more limited functions since the home page will be able to access lists of users who are registered for data collection, or a search section from which they will be able to search for new users or anonymous groups to sign up for. When a company account wishes to subscribe to the data of a specific user, a notification will be sent to the user in question, this will accept or reject the request, then the company can cancel the registration as the user who provides the data will prevent access to your data.
 
-Regarding the Track4Run section, users will be able to create public or private competitions and to do so it will be necessary to insert a valid race path, consisting of: a start, an arrival (also coinciding in case of at least one further stage) start date and time ( that can be postponed by the organizer or by other users who have been defined as co-organizers), in case you want to create a tender invitation, the list of invited users and finally the registration fee (optional). If you want to participate or follow a race, you can do so by selecting one of the races in the NEARBY, YOUR RACES sections.
+Regarding the Track4Run section, users will be able to create public or private competitions and to do so it will be necessary to insert a valid race path, consisting of: a start, an arrival (also coinciding in case of at least one further stage) start date and time (that can be postponed by the organizer or by other users who have been defined as co-organizers), in case you want to create a tender invitation, the list of invited users and finally the registration fee (optional). If you want to participate or follow a race, you can do so by selecting one of the races in the NEARBY, YOUR RACES sections.
 
 The AutomatedSOS service is activated automatically if the user is over the age of 60 at the time of enrollment, otherwise it can be activated from the settings and always works in the background, checking that the health data does not exceed certain thresholds.
 \subsubsection{Goals}
@@ -56,6 +56,9 @@ The AutomatedSOS service is activated automatically if the user is over the age 
 \begin{itemize}
 \item RASD – Requirement Analysis and Specification Document
 \item API - Application Programming Interface
+\item REST - REpresentational State Transfer
+\item HTTPS - HyperText Transfer Protocol over Secure Socket Layer
+\item SDK - Software Development Kit
 \item GPS - Global Positioning System
 \item BPM - Beats (of heart) Per Minute
 \item NUE - Numero Unico Per Emergenze
@@ -67,26 +70,28 @@ The AutomatedSOS service is activated automatically if the user is over the age 
 \item \verb|[|Rn\verb|]|: n-th functional requirement
 \end{itemize}
 
-\subsection{Document Structure}
-Chapter 1 gives an introduction to the problem and describes the purpose of the TrackMe application. The scope of the application is defined by stating the goals and the description of the problem.\newline
+\subsection{Document structure}
+The document is composed of 6 sections.\newline
 
-Chapter 2 presents the overall description of the project. The product perspective includes details on
+\textbf{Section 1 - Introduction}: This section gives an introduction to the problem and describes the purpose of the TrackMe application. The scope of the application is defined by stating the goals and the description of the problem.\newline
+
+\textbf{Section 2 - Overall description}: This section presents the overall description of the project. The product perspective includes details on
 the shared phenomena and the domain models. The class diagram describes the domain model used,
 and the state diagram analyzes the process of arranging a meeting and reaching it in time. Here the
 majority of functions of the system are more precisely specified, with respect to the already mentioned
 goals of the system. In the user characteristics section the types of actors that can use the application
 are described.\newline
 
-Chapter 3 contains the external interface requirements, including: user interfaces, hardware interfaces,
+\textbf{Section 3 - Specific requirements}: This section contains the external interface requirements, including: user interfaces, hardware interfaces,
 software interfaces and communication interfaces. Few scenarios describing specific situations are listed
 here. Furthermore, the functional requirements are defined by using use case and sequence diagram.
 The non-functional requirements are defined through performance requirements, design constraints
 and software system attributes.\newline
 
-Chapter 4 includes the Alloy model with its representation and the discussion of its purpose.\newline
+\textbf{Section 4 - Formal analysis using Alloy}: This section includes the Alloy model with its representation and the discussion of its purpose.\newline
 
-Chapter 5 shows the effort spent by each group member while working on this project.\newline
+\textbf{Section 5 - Effort spent}: This section shows the effort spent by each group member while working on this project.\newline
 
-Chapter 6 includes the reference documents.
+\textbf{Section 6 - References}: This section includes the reference documents.
 
 %\end{document}
