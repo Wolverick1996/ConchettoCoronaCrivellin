@@ -89,7 +89,7 @@ genericData: set UsersData
 sig SpecificIndividualsDataSurvey extends Survey{
 specificData: set GenericUser
 }
-{researchResult =< 2 and #specificData = researchResult}
+{researchResult = 1 and #specificData = researchResult}
 
 abstract sig Notification{}
 
